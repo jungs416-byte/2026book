@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>독서캠프 수강신청</title>
+  <title>독서캠프 수강신청 (날짜별 입력)</title>
   <style>
     :root { --border-color:#666; --ok-color:#138000; --bad-color:#d10000; --warn-color:#ff8c00; }
     *,*::before,*::after{box-sizing:border-box}
@@ -69,6 +69,10 @@
     label.disabled { opacity: 0.45; }
     .cap-info.full { color: var(--bad-color); font-weight:700; }
     .cap-info.warn { color: var(--warn-color); font-weight:700; }
+
+    .summary-line { display:flex; flex-wrap:wrap; gap:12px; align-items:center; margin:6px 0; font-weight:700; }
+    .summary-item.ok { color:var(--ok-color); }
+    .summary-item.bad { color:var(--bad-color); }
 
     @media (max-width:900px){
       .date-grid { flex-direction:column; }
@@ -466,13 +470,24 @@
 
   </div>
 
-  <!-- 전역 상태 메시지 (기존 스크립트가 참조) -->
+  <!-- 전역 상태 메시지 (오류 전용 요소만 유지; 기본 상태 텍스트는 summary로 보여주므로 여기서는 기본 텍스트를 쓰지 않습니다) -->
   <div id="messages" style="margin-top:8px">
+    <!-- readMsg/movMsg/louMsg/bibleMsg are used only for error messages (중복 등). 기본 "현재 0..." 텍스트는 더 이상 여기서 출력하지 않습니다. -->
     <div id="readMsg" class="status" aria-live="polite"></div>
     <div id="movMsg" class="status" aria-live="polite"></div>
     <div id="louMsg" class="status" aria-live="polite"></div>
     <div id="bibleMsg" class="status" aria-live="polite"></div>
     <div id="selMsg" class="status" aria-live="polite"></div>
+  </div>
+
+  <!-- 요약 라인을 "시간표 만들기" 바로 위에 배치 -->
+  <div id="summaryContainerWrapper" style="margin-top:8px">
+    <div id="summaryContainer" class="summary-line" aria-live="polite">
+      <div id="summaryRead" class="summary-item"></div>
+      <div id="summaryMovie" class="summary-item"></div>
+      <div id="summaryLou" class="summary-item"></div>
+      <div id="summaryBible" class="summary-item"></div>
+    </div>
   </div>
 
   <div class="action-row" style="margin-top:12px">
@@ -662,32 +677,88 @@
       const ids = ['sel-0126','sel-0127','sel-0128','sel-0129','sel-0202'];
       const vals = ids.map(id=>document.getElementById(id).value).filter(v=>v);
       const msg = document.getElementById('selMsg');
-      if (vals.length < 5) msg.innerHTML = '<span class="bad">5일 모두 선택해야 합니다.</span>';
+      if (vals.length < 5) msg.innerHTML = '<span class="bad">선택수업:5일 모두 선택해야합니다</span>';
       else if (new Set(vals).size < 5) msg.innerHTML = '<span class="bad">모두 다른 과목이어야 합니다.</span>';
       else msg.innerHTML = '<span class="ok">조건 만족</span>';
     }
 
+    // updateReadingStatus no longer writes the "현재 0시간..." text to readMsg.
+    // readMsg/movMsg/louMsg/bibleMsg are preserved for error messages only (교시 중복 등).
     function updateReadingStatus() {
-      const div = document.getElementById('readMsg');
       let total=0, soy=0;
       document.querySelectorAll('.read').forEach(s=>{ if (s.value) { total++; if (s.value==='소영반') soy++; }});
-      if (total<14) div.innerHTML = `<span class="bad">현재 ${total}시간 (14시간 필요)</span>`;
-      else if (soy>7) div.innerHTML = `<span class="bad">소영반 초과 (${soy}시간)</span>`;
-      else div.innerHTML = `<span class="ok">조건 만족 (${total}시간)</span>`;
+      // only set overlap/error messages to readMsg elsewhere; summary line updated below
+      updateSummaryLine();
     }
 
     function updateMovieStatus(){
-      const movMsg = document.getElementById('movMsg');
-      const cnt = document.querySelectorAll('.mov:checked').length;
-      if (cnt>3) movMsg.innerHTML = '<span class="bad">영화는 최대 3회까지만 가능합니다.</span>';
-      else movMsg.innerHTML = `<span class="ok">현재 ${cnt}회 선택 (최대 3회)</span>`;
+      // only set movMsg on errors elsewhere; update summary
+      updateSummaryLine();
     }
 
     function updateLouStatus(){
-      const louMsg = document.getElementById('louMsg');
-      const cnt = document.querySelectorAll('.lou:checked').length;
-      if (cnt>6) louMsg.innerHTML = '<span class="bad">마네는 최대 6시간까지만 선택 가능합니다.</span>';
-      else louMsg.innerHTML = `<span class="ok">현재 ${cnt}시간 선택 (최대 6시간)</span>`;
+      // only set louMsg on errors elsewhere; update summary
+      updateSummaryLine();
+    }
+
+    function updateBibleStatus(){
+      // only set bibleMsg on errors elsewhere; update summary
+      updateSummaryLine();
+    }
+
+    // Summary line: show each item only if count > 0.
+    // This removes the "현재 0시간(...)" zero lines per your request.
+    function updateSummaryLine(){
+      const totalRead = Array.from(document.querySelectorAll('.read')).filter(s => s.value).length;
+      const movCnt = document.querySelectorAll('.mov:checked').length;
+      const louCnt = document.querySelectorAll('.lou:checked').length;
+      const bibleCnt = document.querySelectorAll('.bible:checked').length;
+
+      const readEl = document.getElementById('summaryRead');
+      const movEl = document.getElementById('summaryMovie');
+      const louEl = document.getElementById('summaryLou');
+      const bibleEl = document.getElementById('summaryBible');
+
+      // 책읽기: show only when there is at least 1 selected
+      if (totalRead > 0) {
+        if (totalRead < 14) {
+          readEl.className = 'summary-item bad';
+          readEl.textContent = `책읽기: 현재 ${totalRead}시간 (14시간 필요)`;
+        } else {
+          readEl.className = 'summary-item ok';
+          readEl.textContent = `책읽기: 현재 ${totalRead}시간`;
+        }
+      } else {
+        readEl.className = 'summary-item';
+        readEl.textContent = '';
+      }
+
+      // 영화: show only when > 0
+      if (movCnt > 0) {
+        movEl.className = movCnt > 3 ? 'summary-item bad' : 'summary-item ok';
+        movEl.textContent = `영화시청: 현재 ${movCnt}회 선택 (최대 3회)`;
+      } else {
+        movEl.className = 'summary-item';
+        movEl.textContent = '';
+      }
+
+      // 마네: show only when > 0
+      if (louCnt > 0) {
+        louEl.className = louCnt > 6 ? 'summary-item bad' : 'summary-item ok';
+        louEl.textContent = `마네: 현재 ${louCnt}시간 선택 (최대 6시간)`;
+      } else {
+        louEl.className = 'summary-item';
+        louEl.textContent = '';
+      }
+
+      // 성경동화: show only when > 0
+      if (bibleCnt > 0) {
+        bibleEl.className = 'summary-item ok';
+        bibleEl.textContent = `성경동화: 현재 ${bibleCnt}개 선택`;
+      } else {
+        bibleEl.className = 'summary-item';
+        bibleEl.textContent = '';
+      }
     }
 
     function generateCapacityIds(){
@@ -804,7 +875,7 @@
       html += `</table></div>`;
       document.getElementById('result').innerHTML = html;
 
-      updateReadingStatus(); updateMovieStatus(); updateLouStatus(); checkSelValidity();
+      updateReadingStatus(); updateMovieStatus(); updateLouStatus(); updateBibleStatus(); checkSelValidity();
       refreshReadAndSelRemaining();
     }
 
@@ -819,8 +890,14 @@
               const occ = buildScheduleOccupation();
               if (occ[day] && occ[day][period] && occ[day][period].some(t => t !== '책읽기')) {
                 this.value = '';
+                // show only overlap error in readMsg
                 document.getElementById('readMsg').innerHTML = `<span class="bad">${day} ${period}교시 중복!</span>`;
+                // clear summary after error set (summary will be updated by updateReadingStatus())
+                updateReadingStatus();
                 return;
+              } else {
+                // clear any previous overlap message when selection is fine
+                document.getElementById('readMsg').innerHTML = '';
               }
             }
             updateReadingStatus();
@@ -842,11 +919,16 @@
             if (occ[d] && occ[d][p] && occ[d][p].some(t => t !== '성경동화')) {
               this.checked = false;
               document.getElementById('bibleMsg').innerHTML = `<span class="bad">${d} ${p}교시 중복!</span>`;
+              updateBibleStatus();
               return;
+            } else {
+              document.getElementById('bibleMsg').innerHTML = '';
             }
+          } else {
+            // clear any previous bible error if unchecked
+            document.getElementById('bibleMsg').innerHTML = '';
           }
-          const bibleChecked = document.querySelectorAll('.bible:checked').length;
-          document.getElementById('bibleMsg').innerHTML = `<span class="ok">현재 ${bibleChecked}개 선택</span>`;
+          updateBibleStatus();
         }, { passive: false });
       });
 
@@ -856,7 +938,12 @@
           if (this.checked) {
             document.querySelectorAll('.mov').forEach(m => { if (m !== this && m.dataset.day === day && m.checked) m.checked = false; });
             let total = document.querySelectorAll('.mov:checked').length;
-            if (total > 3) { this.checked = false; document.getElementById('movMsg').innerHTML = '<span class="bad">영화는 최대 3회까지만 선택 가능합니다.</span>'; return; }
+            if (total > 3) {
+              this.checked = false;
+              document.getElementById('movMsg').innerHTML = '<span class="bad">영화는 최대 3회까지만 선택 가능합니다.</span>';
+              updateMovieStatus();
+              return;
+            }
             const s = Number(this.dataset.start);
             const occ = buildScheduleOccupation();
             for (let p of [s, s+1]) {
@@ -866,6 +953,11 @@
                 return;
               }
             }
+            // clear mov error if selection valid
+            document.getElementById('movMsg').innerHTML = '';
+          } else {
+            // cleared a mov checkbox: remove previous mov error
+            document.getElementById('movMsg').innerHTML = '';
           }
           updateMovieStatus();
         }, { passive: false });
@@ -877,7 +969,12 @@
           if (this.checked) {
             document.querySelectorAll('.lou').forEach(x => { if (x !== this && x.dataset.day === day && x.checked) x.checked = false; });
             const totalLou = document.querySelectorAll('.lou:checked').length;
-            if (totalLou > 6) { this.checked = false; document.getElementById('louMsg').innerHTML = '<span class="bad">마네는 최대 6시간까지만 선택 가능합니다.</span>'; return; }
+            if (totalLou > 6) {
+              this.checked = false;
+              document.getElementById('louMsg').innerHTML = '<span class="bad">마네는 최대 6시간까지만 선택 가능합니다.</span>';
+              updateLouStatus();
+              return;
+            }
             const occ = buildScheduleOccupation();
             const p = Number(this.dataset.period);
             if (occ[this.dataset.day] && occ[this.dataset.day][p] && occ[this.dataset.day][p].some(t => t !== '마네')) {
@@ -885,6 +982,9 @@
               alert(`${this.dataset.day} ${p}교시는 이미 다른 수업이 있습니다.`);
               return;
             }
+            document.getElementById('louMsg').innerHTML = '';
+          } else {
+            document.getElementById('louMsg').innerHTML = '';
           }
           updateLouStatus();
         }, { passive: false });
@@ -899,7 +999,7 @@
       document.getElementById('makeBtn').addEventListener('pointerup', function(e){ e.preventDefault(); makeTable(); }, { passive: false });
       document.getElementById('submitBtn').addEventListener('click', function(e){ e.preventDefault(); submitRegistration(); }, { passive: false });
 
-      checkSelValidity(); updateReadingStatus(); updateMovieStatus(); updateLouStatus();
+      checkSelValidity(); updateReadingStatus(); updateMovieStatus(); updateLouStatus(); updateBibleStatus();
 
       startSeatsPolling(5000);
       window.addEventListener('beforeunload', () => stopSeatsPolling());
