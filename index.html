@@ -25,23 +25,12 @@
     .status{margin-top:6px;font-size:13px}
     .cap-info { font-size:12px; margin-left:8px; color:#444; font-weight:600; }
 
-    /* layout */
     .reading-row, .bible-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:6px}
     .reading-row strong, .bible-row strong{min-width:86px;flex:0 0 auto}
     .reading-row label, .bible-row label{display:flex;gap:8px;align-items:center;flex:0 1 auto}
 
     select, input[type="text"], button{font-size:16px}
-    select{
-      -webkit-appearance: auto;
-      appearance: auto;
-      min-width:120px;
-      padding:10px 8px;
-      border-radius:6px;
-      border:1px solid #cfcfcf;
-      background:#fff;
-      color:#000;
-      display:inline-block;
-    }
+    select{ -webkit-appearance: auto; appearance: auto; min-width:120px; padding:10px 8px; border-radius:6px; border:1px solid #cfcfcf; background:#fff; color:#000; display:inline-block; }
     select.full { width:100%; max-width:480px; box-sizing:border-box; }
     input[type="checkbox"]{transform:scale(1.05);margin-right:6px}
     input[type="text"], select{padding:8px}
@@ -75,41 +64,100 @@
     <div class="row">이름: <input type="text" id="name" aria-label="이름"></div>
   </fieldset>
 
-  <!-- Order: 영화 → 마네 → 성경동화 → 책읽기 -->
+  <!-- 영화, 마네, 성경동화, 책읽기, 선택수업 (모든 행/옵션을 명시적으로 포함) -->
   <fieldset id="movieFieldset">
     <legend>영화 시청 (전체 최대 3회)</legend>
-    <div class="row"><strong>1/27(화):</strong> <label><input type="checkbox" class="mov" data-day="1/27(화)" data-start="1"><span class="label-text">1-2교시</span><span class="cap-info" aria-hidden="true"></span></label> <label><input type="checkbox" class="mov" data-day="1/27(화)" data-start="3"><span class="label-text">3-4교시</span><span class="cap-info" aria-hidden="true"></span></label></div>
-    <div class="row"><strong>1/28(수):</strong> <label><input type="checkbox" class="mov" data-day="1/28(수)" data-start="1"><span class="label-text">1-2교시</span><span class="cap-info" aria-hidden="true"></span></label> <label><input type="checkbox" class="mov" data-day="1/28(수)" data-start="3"><span class="label-text">3-4교시</span><span class="cap-info" aria-hidden="true"></span></label></div>
-    <div class="row"><strong>1/29(목):</strong> <label><input type="checkbox" class="mov" data-day="1/29(목)" data-start="1"><span class="label-text">1-2교시</span><span class="cap-info" aria-hidden="true"></span></label> <label><input type="checkbox" class="mov" data-day="1/29(목)" data-start="3"><span class="label-text">3-4교시</span><span class="cap-info" aria-hidden="true"></span></label></div>
-    <div class="row"><strong>1/30(금):</strong> <label><input type="checkbox" class="mov" data-day="1/30(금)" data-start="1"><span class="label-text">1-2교시</span><span class="cap-info" aria-hidden="true"></span></label> <label><input type="checkbox" class="mov" data-day="1/30(금)" data-start="3"><span class="label-text">3-4교시</span><span class="cap-info" aria-hidden="true"></span></label></div>
-    <div class="row"><strong>2/2(월):</strong> <label><input type="checkbox" class="mov" data-day="2/2(월)" data-start="1"><span class="label-text">1-2교시</span><span class="cap-info" aria-hidden="true"></span></label></div>
-    <div class="row"><strong>2/3(화):</strong> <label><input type="checkbox" class="mov" data-day="2/3(화)" data-start="1"><span class="label-text">1-2교시</span><span class="cap-info" aria-hidden="true"></span></label> <label><input type="checkbox" class="mov" data-day="2/3(화)" data-start="3"><span class="label-text">3-4교시</span><span class="cap-info" aria-hidden="true"></span></label></div>
-    <div class="row"><strong>2/5(목):</strong> <label><input type="checkbox" class="mov" data-day="2/5(목)" data-start="1"><span class="label-text">1-2교시</span><span class="cap-info" aria-hidden="true"></span></label></div>
+    <div class="row"><strong>1/27(화):</strong>
+      <label><input type="checkbox" class="mov" data-day="1/27(화)" data-start="1">1-2교시<span class="cap-info" aria-hidden="true"></span></label>
+      <label><input type="checkbox" class="mov" data-day="1/27(화)" data-start="3">3-4교시<span class="cap-info" aria-hidden="true"></span></label>
+    </div>
+    <div class="row"><strong>1/28(수):</strong>
+      <label><input type="checkbox" class="mov" data-day="1/28(수)" data-start="1">1-2교시<span class="cap-info" aria-hidden="true"></span></label>
+      <label><input type="checkbox" class="mov" data-day="1/28(수)" data-start="3">3-4교시<span class="cap-info" aria-hidden="true"></span></label>
+    </div>
+    <div class="row"><strong>1/29(목):</strong>
+      <label><input type="checkbox" class="mov" data-day="1/29(목)" data-start="1">1-2교시<span class="cap-info" aria-hidden="true"></span></label>
+      <label><input type="checkbox" class="mov" data-day="1/29(목)" data-start="3">3-4교시<span class="cap-info" aria-hidden="true"></span></label>
+    </div>
+    <div class="row"><strong>1/30(금):</strong>
+      <label><input type="checkbox" class="mov" data-day="1/30(금)" data-start="1">1-2교시<span class="cap-info" aria-hidden="true"></span></label>
+      <label><input type="checkbox" class="mov" data-day="1/30(금)" data-start="3">3-4교시<span class="cap-info" aria-hidden="true"></span></label>
+    </div>
+    <div class="row"><strong>2/2(월):</strong>
+      <label><input type="checkbox" class="mov" data-day="2/2(월)" data-start="1">1-2교시<span class="cap-info" aria-hidden="true"></span></label>
+    </div>
+    <div class="row"><strong>2/3(화):</strong>
+      <label><input type="checkbox" class="mov" data-day="2/3(화)" data-start="1">1-2교시<span class="cap-info" aria-hidden="true"></span></label>
+      <label><input type="checkbox" class="mov" data-day="2/3(화)" data-start="3">3-4교시<span class="cap-info" aria-hidden="true"></span></label>
+    </div>
+    <div class="row"><strong>2/5(목):</strong>
+      <label><input type="checkbox" class="mov" data-day="2/5(목)" data-start="1">1-2교시<span class="cap-info" aria-hidden="true"></span></label>
+    </div>
     <div id="movMsg" class="status" aria-live="polite"></div>
   </fieldset>
 
   <fieldset id="louFieldset">
     <legend>마네 (하루 1시간, 전체 최대 6시간)</legend>
-    <div class="row"><strong>1/27(화):</strong> <label><input type="checkbox" class="lou" data-day="1/27(화)" data-period="3"><span class="label-text">3교시</span><span class="cap-info" aria-hidden="true"></span></label> <label><input type="checkbox" class="lou" data-day="1/27(화)" data-period="4"><span class="label-text">4교시</span><span class="cap-info" aria-hidden="true"></span></label></div>
-    <div class="row"><strong>1/28(수):</strong> <label><input type="checkbox" class="lou" data-day="1/28(수)" data-period="3"><span class="label-text">3교시</span><span class="cap-info" aria-hidden="true"></span></label> <label><input type="checkbox" class="lou" data-day="1/28(수)" data-period="4"><span class="label-text">4교시</span><span class="cap-info" aria-hidden="true"></span></label></div>
-    <div class="row"><strong>1/29(목):</strong> <label><input type="checkbox" class="lou" data-day="1/29(목)" data-period="3"><span class="label-text">3교시</span><span class="cap-info" aria-hidden="true"></span></label> <label><input type="checkbox" class="lou" data-day="1/29(목)" data-period="4"><span class="label-text">4교시</span><span class="cap-info" aria-hidden="true"></span></label></div>
-    <div class="row"><strong>1/30(금):</strong> <label><input type="checkbox" class="lou" data-day="1/30(금)" data-period="3"><span class="label-text">3교시</span><span class="cap-info" aria-hidden="true"></span></label> <label><input type="checkbox" class="lou" data-day="1/30(금)" data-period="4"><span class="label-text">4교시</span><span class="cap-info" aria-hidden="true"></span></label></div>
-    <div class="row"><strong>2/2(월):</strong> <label><input type="checkbox" class="lou" data-day="2/2(월)" data-period="3"><span class="label-text">3교시</span><span class="cap-info" aria-hidden="true"></span></label></div>
-    <div class="row"><strong>2/3(화):</strong> <label><input type="checkbox" class="lou" data-day="2/3(화)" data-period="3"><span class="label-text">3교시</span><span class="cap-info" aria-hidden="true"></span></label> <label><input type="checkbox" class="lou" data-day="2/3(화)" data-period="4"><span class="label-text">4교시</span><span class="cap-info" aria-hidden="true"></span></label></div>
-    <div class="row"><strong>2/5(목):</strong> <label><input type="checkbox" class="lou" data-day="2/5(목)" data-period="3"><span class="label-text">3교시</span><span class="cap-info" aria-hidden="true"></span></label></div>
+    <div class="row"><strong>1/27(화):</strong>
+      <label><input type="checkbox" class="lou" data-day="1/27(화)" data-period="3">3교시<span class="cap-info" aria-hidden="true"></span></label>
+      <label><input type="checkbox" class="lou" data-day="1/27(화)" data-period="4">4교시<span class="cap-info" aria-hidden="true"></span></label>
+    </div>
+    <div class="row"><strong>1/28(수):</strong>
+      <label><input type="checkbox" class="lou" data-day="1/28(수)" data-period="3">3교시<span class="cap-info" aria-hidden="true"></span></label>
+      <label><input type="checkbox" class="lou" data-day="1/28(수)" data-period="4">4교시<span class="cap-info" aria-hidden="true"></span></label>
+    </div>
+    <div class="row"><strong>1/29(목):</strong>
+      <label><input type="checkbox" class="lou" data-day="1/29(목)" data-period="3">3교시<span class="cap-info" aria-hidden="true"></span></label>
+      <label><input type="checkbox" class="lou" data-day="1/29(목)" data-period="4">4교시<span class="cap-info" aria-hidden="true"></span></label>
+    </div>
+    <div class="row"><strong>1/30(금):</strong>
+      <label><input type="checkbox" class="lou" data-day="1/30(금)" data-period="3">3교시<span class="cap-info" aria-hidden="true"></span></label>
+      <label><input type="checkbox" class="lou" data-day="1/30(금)" data-period="4">4교시<span class="cap-info" aria-hidden="true"></span></label>
+    </div>
+    <div class="row"><strong>2/2(월):</strong>
+      <label><input type="checkbox" class="lou" data-day="2/2(월)" data-period="3">3교시<span class="cap-info" aria-hidden="true"></span></label>
+    </div>
+    <div class="row"><strong>2/3(화):</strong>
+      <label><input type="checkbox" class="lou" data-day="2/3(화)" data-period="3">3교시<span class="cap-info" aria-hidden="true"></span></label>
+      <label><input type="checkbox" class="lou" data-day="2/3(화)" data-period="4">4교시<span class="cap-info" aria-hidden="true"></span></label>
+    </div>
+    <div class="row"><strong>2/5(목):</strong>
+      <label><input type="checkbox" class="lou" data-day="2/5(목)" data-period="3">3교시<span class="cap-info" aria-hidden="true"></span></label>
+    </div>
     <div id="louMsg" class="status" aria-live="polite"></div>
   </fieldset>
 
   <fieldset id="bibleFieldset">
     <legend>성경동화 (모든 날짜 1·2교시 선택)</legend>
     <div id="bibleArea">
-      <div class="bible-row"><strong>1/27(화):</strong><label><input type="checkbox" class="bible" data-day="1/27(화)" data-period="1"><span class="label-text">1교시</span><span class="cap-info" aria-hidden="true"></span></label><label><input type="checkbox" class="bible" data-day="1/27(화)" data-period="2"><span class="label-text">2교시</span><span class="cap-info" aria-hidden="true"></span></label></div>
-      <div class="bible-row"><strong>1/28(수):</strong><label><input type="checkbox" class="bible" data-day="1/28(수)" data-period="1"><span class="label-text">1교시</span><span class="cap-info" aria-hidden="true"></span></label><label><input type="checkbox" class="bible" data-day="1/28(수)" data-period="2"><span class="label-text">2교시</span><span class="cap-info" aria-hidden="true"></span></label></div>
-      <div class="bible-row"><strong>1/29(목):</strong><label><input type="checkbox" class="bible" data-day="1/29(목)" data-period="1"><span class="label-text">1교시</span><span class="cap-info" aria-hidden="true"></span></label><label><input type="checkbox" class="bible" data-day="1/29(목)" data-period="2"><span class="label-text">2교시</span><span class="cap-info" aria-hidden="true"></span></label></div>
-      <div class="bible-row"><strong>1/30(금):</strong><label><input type="checkbox" class="bible" data-day="1/30(금)" data-period="1"><span class="label-text">1교시</span><span class="cap-info" aria-hidden="true"></span></label><label style="visibility:hidden"><input type="checkbox" disabled> </label></div>
-      <div class="bible-row"><strong>2/2(월):</strong><label><input type="checkbox" class="bible" data-day="2/2(월)" data-period="1"><span class="label-text">1교시</span><span class="cap-info" aria-hidden="true"></span></label><label style="visibility:hidden"><input type="checkbox" disabled> </label></div>
-      <div class="bible-row"><strong>2/3(화):</strong><label><input type="checkbox" class="bible" data-day="2/3(화)" data-period="1"><span class="label-text">1교시</span><span class="cap-info" aria-hidden="true"></span></label><label><input type="checkbox" class="bible" data-day="2/3(화)" data-period="2"><span class="label-text">2교시</span><span class="cap-info" aria-hidden="true"></span></label></div>
-      <div class="bible-row"><strong>2/5(목):</strong><label><input type="checkbox" class="bible" data-day="2/5(목)" data-period="1"><span class="label-text">1교시</span><span class="cap-info" aria-hidden="true"></span></label><label style="visibility:hidden"><input type="checkbox" disabled> </label></div>
+      <div class="bible-row"><strong>1/27(화):</strong>
+        <label><input type="checkbox" class="bible" data-day="1/27(화)" data-period="1">1교시<span class="cap-info" aria-hidden="true"></span></label>
+        <label><input type="checkbox" class="bible" data-day="1/27(화)" data-period="2">2교시<span class="cap-info" aria-hidden="true"></span></label>
+      </div>
+      <div class="bible-row"><strong>1/28(수):</strong>
+        <label><input type="checkbox" class="bible" data-day="1/28(수)" data-period="1">1교시<span class="cap-info" aria-hidden="true"></span></label>
+        <label><input type="checkbox" class="bible" data-day="1/28(수)" data-period="2">2교시<span class="cap-info" aria-hidden="true"></span></label>
+      </div>
+      <div class="bible-row"><strong>1/29(목):</strong>
+        <label><input type="checkbox" class="bible" data-day="1/29(목)" data-period="1">1교시<span class="cap-info" aria-hidden="true"></span></label>
+        <label><input type="checkbox" class="bible" data-day="1/29(목)" data-period="2">2교시<span class="cap-info" aria-hidden="true"></span></label>
+      </div>
+      <div class="bible-row"><strong>1/30(금):</strong>
+        <label><input type="checkbox" class="bible" data-day="1/30(금)" data-period="1">1교시<span class="cap-info" aria-hidden="true"></span></label>
+        <label style="visibility:hidden"><input type="checkbox" disabled> </label>
+      </div>
+      <div class="bible-row"><strong>2/2(월):</strong>
+        <label><input type="checkbox" class="bible" data-day="2/2(월)" data-period="1">1교시<span class="cap-info" aria-hidden="true"></span></label>
+        <label style="visibility:hidden"><input type="checkbox" disabled> </label>
+      </div>
+      <div class="bible-row"><strong>2/3(화):</strong>
+        <label><input type="checkbox" class="bible" data-day="2/3(화)" data-period="1">1교시<span class="cap-info" aria-hidden="true"></span></label>
+        <label><input type="checkbox" class="bible" data-day="2/3(화)" data-period="2">2교시<span class="cap-info" aria-hidden="true"></span></label>
+      </div>
+      <div class="bible-row"><strong>2/5(목):</strong>
+        <label><input type="checkbox" class="bible" data-day="2/5(목)" data-period="1">1교시<span class="cap-info" aria-hidden="true"></span></label>
+        <label style="visibility:hidden"><input type="checkbox" disabled> </label>
+      </div>
     </div>
     <div id="bibleMsg" class="status" aria-live="polite"></div>
   </fieldset>
@@ -117,51 +165,58 @@
   <fieldset id="readingFieldset">
     <legend>책읽기 (전체 14시간 이상, 소영반 7시간 이하)</legend>
     <div id="readingArea">
+      <!-- 1/27 -->
       <div class="reading-row"><strong>1/27(화):</strong>
-        <label>1교시 <select class="read full" data-day="1/27(화)" data-period="1"><option value="">선택 안함</option><option>승현반</option><option>소영반</option><option>현주반</option><option>현승반</option><option>미리반</option><option>정식반</option></select></label>
-        <label>2교시 <select class="read full" data-day="1/27(화)" data-period="2"><option value="">선택 안함</option><option>승현반</option><option>소영반</option><option>현주반</option><option>현승반</option><option>미리반</option><option>정식반</option></select></label>
-        <label>3교시 <select class="read full" data-day="1/27(화)" data-period="3"><option value="">선택 안함</option><option>승현반</option><option>소영반</option><option>현주반</option><option>현승반</option><option>미리반</option><option>정식반</option></select></label>
-        <label>4교시 <select class="read full" data-day="1/27(화)" data-period="4"><option value="">선택 안함</option><option>승현반</option><option>소영반</option><option>현주반</option><option>현승반</option><option>미리반</option><option>정식반</option></select></label>
+        <label>1교시 <select class="read full" data-day="1/27(화)" data-period="1"><option>선택 안함</option><option>승현반</option><option>소영반</option><option>현주반</option><option>현승반</option><option>미리반</option><option>정식반</option></select></label>
+        <label>2교시 <select class="read full" data-day="1/27(화)" data-period="2"><option>선택 안함</option><option>승현반</option><option>소영반</option><option>현주반</option><option>현승반</option><option>미리반</option><option>정식반</option></select></label>
+        <label>3교시 <select class="read full" data-day="1/27(화)" data-period="3"><option>선택 안함</option><option>승현반</option><option>소영반</option><option>현주반</option><option>현승반</option><option>미리반</option><option>정식반</option></select></label>
+        <label>4교시 <select class="read full" data-day="1/27(화)" data-period="4"><option>선택 안함</option><option>승현반</option><option>소영반</option><option>현주반</option><option>현승반</option><option>미리반</option><option>정식반</option></select></label>
       </div>
 
+      <!-- 1/28 -->
       <div class="reading-row"><strong>1/28(수):</strong>
-        <label>1교시 <select class="read full" data-day="1/28(수)" data-period="1"><option value="">선택 안함</option><option>승현반</option><option>소영반</option><option>현주반</option><option>현승반</option><option>미리반</option><option>정식반</option></select></label>
-        <label>2교시 <select class="read full" data-day="1/28(수)" data-period="2"><option value="">선택 안함</option><option>승현반</option><option>소영반</option><option>현주반</option><option>현승반</option><option>미리반</option><option>정식반</option></select></label>
-        <label>3교시 <select class="read full" data-day="1/28(수)" data-period="3"><option value="">선택 안함</option><option>승현반</option><option>소영반</option><option>현주반</option><option>현승반</option><option>미리반</option><option>정식반</option></select></label>
-        <label>4교시 <select class="read full" data-day="1/28(수)" data-period="4"><option value="">선택 안함</option><option>승현반</option><option>소영반</option><option>현주반</option><option>현승반</option><option>미리반</option><option>정식반</option></select></label>
+        <label>1교시 <select class="read full" data-day="1/28(수)" data-period="1"><option>선택 안함</option><option>승현반</option><option>소영반</option><option>현주반</option><option>현승반</option><option>미리반</option><option>정식반</option></select></label>
+        <label>2교시 <select class="read full" data-day="1/28(수)" data-period="2"><option>선택 안함</option><option>승현반</option><option>소영반</option><option>현주반</option><option>현승반</option><option>미리반</option><option>정식반</option></select></label>
+        <label>3교시 <select class="read full" data-day="1/28(수)" data-period="3"><option>선택 안함</option><option>승현반</option><option>소영반</option><option>현주반</option><option>현승반</option><option>미리반</option><option>정식반</option></select></label>
+        <label>4교시 <select class="read full" data-day="1/28(수)" data-period="4"><option>선택 안함</option><option>승현반</option><option>소영반</option><option>현주반</option><option>현승반</option><option>미리반</option><option>정식반</option></select></label>
       </div>
 
+      <!-- 1/29 -->
       <div class="reading-row"><strong>1/29(목):</strong>
-        <label>1교시 <select class="read full" data-day="1/29(목)" data-period="1"><option value="">선택 안함</option><option>승현반</option><option>소영반</option><option>현주반</option><option>현승반</option><option>미리반</option><option>정식반</option></select></label>
-        <label>2교시 <select class="read full" data-day="1/29(목)" data-period="2"><option value="">선택 안함</option><option>승현반</option><option>소영반</option><option>현주반</option><option>현승반</option><option>미리반</option><option>정식반</option></select></label>
-        <label>3교시 <select class="read full" data-day="1/29(목)" data-period="3"><option value="">선택 안함</option><option>승현반</option><option>소영반</option><option>현주반</option><option>현승반</option><option>미리반</option><option>정식반</option></select></label>
-        <label>4교시 <select class="read full" data-day="1/29(목)" data-period="4"><option value="">선택 안함</option><option>승현반</option><option>소영반</option><option>현주반</option><option>현승반</option><option>미리반</option><option>정식반</option></select></label>
+        <label>1교시 <select class="read full" data-day="1/29(목)" data-period="1"><option>선택 안함</option><option>승현반</option><option>소영반</option><option>현주반</option><option>현승반</option><option>미리반</option><option>정식반</option></select></label>
+        <label>2교시 <select class="read full" data-day="1/29(목)" data-period="2"><option>선택 안함</option><option>승현반</option><option>소영반</option><option>현주반</option><option>현승반</option><option>미리반</option><option>정식반</option></select></label>
+        <label>3교시 <select class="read full" data-day="1/29(목)" data-period="3"><option>선택 안함</option><option>승현반</option><option>소영반</option><option>현주반</option><option>현승반</option><option>미리반</option><option>정식반</option></select></label>
+        <label>4교시 <select class="read full" data-day="1/29(목)" data-period="4"><option>선택 안함</option><option>승현반</option><option>소영반</option><option>현주반</option><option>현승반</option><option>미리반</option><option>정식반</option></select></label>
       </div>
 
+      <!-- 1/30 -->
       <div class="reading-row"><strong>1/30(금):</strong>
-        <label>1교시 <select class="read full" data-day="1/30(금)" data-period="1"><option value="">선택 안함</option><option>승현반</option><option>소영반</option><option>현주반</option><option>현승반</option><option>미리반</option><option>정식반</option></select></label>
-        <label>2교시 <select class="read full" data-day="1/30(금)" data-period="2"><option value="">선택 안함</option><option>승현반</option><option>소영반</option><option>현주반</option><option>현승반</option><option>미리반</option><option>정식반</option></select></label>
-        <label>3교시 <select class="read full" data-day="1/30(금)" data-period="3"><option value="">선택 안함</option><option>승현반</option><option>소영반</option><option>현주반</option><option>현승반</option><option>미리반</option><option>정식반</option></select></label>
-        <label>4교시 <select class="read full" data-day="1/30(금)" data-period="4"><option value="">선택 안함</option><option>승현반</option><option>소영반</option><option>현주반</option><option>현승반</option><option>미리반</option><option>정식반</option></select></label>
+        <label>1교시 <select class="read full" data-day="1/30(금)" data-period="1"><option>선택 안함</option><option>승현반</option><option>소영반</option><option>현주반</option><option>현승반</option><option>미리반</option><option>정식반</option></select></label>
+        <label>2교시 <select class="read full" data-day="1/30(금)" data-period="2"><option>선택 안함</option><option>승현반</option><option>소영반</option><option>현주반</option><option>현승반</option><option>미리반</option><option>정식반</option></select></label>
+        <label>3교시 <select class="read full" data-day="1/30(금)" data-period="3"><option>선택 안함</option><option>승현반</option><option>소영반</option><option>현주반</option><option>현승반</option><option>미리반</option><option>정식반</option></select></label>
+        <label>4교시 <select class="read full" data-day="1/30(금)" data-period="4"><option>선택 안함</option><option>승현반</option><option>소영반</option><option>현주반</option><option>현승반</option><option>미리반</option><option>정식반</option></select></label>
       </div>
 
+      <!-- 2/2 -->
       <div class="reading-row"><strong>2/2(월):</strong>
-        <label>1교시 <select class="read full" data-day="2/2(월)" data-period="1"><option value="">선택 안함</option><option>승현반</option><option>소영반</option><option>현주반</option><option>현승반</option><option>미리반</option><option>정식반</option></select></label>
-        <label>2교시 <select class="read full" data-day="2/2(월)" data-period="2"><option value="">선택 안함</option><option>승현반</option><option>소영반</option><option>현주반</option><option>현승반</option><option>미리반</option><option>정식반</option></select></label>
-        <label>3교시 <select class="read full" data-day="2/2(월)" data-period="3"><option value="">선택 안함</option><option>승현반</option><option>소영반</option><option>현주반</option><option>현승반</option><option>미리반</option><option>정식반</option></select></label>
+        <label>1교시 <select class="read full" data-day="2/2(월)" data-period="1"><option>선택 안함</option><option>승현반</option><option>소영반</option><option>현주반</option><option>현승반</option><option>미리반</option><option>정식반</option></select></label>
+        <label>2교시 <select class="read full" data-day="2/2(월)" data-period="2"><option>선택 안함</option><option>승현반</option><option>소영반</option><option>현주반</option><option>현승반</option><option>미리반</option><option>정식반</option></select></label>
+        <label>3교시 <select class="read full" data-day="2/2(월)" data-period="3"><option>선택 안함</option><option>승현반</option><option>소영반</option><option>현주반</option><option>현승반</option><option>미리반</option><option>정식반</option></select></label>
       </div>
 
+      <!-- 2/3 -->
       <div class="reading-row"><strong>2/3(화):</strong>
-        <label>1교시 <select class="read full" data-day="2/3(화)" data-period="1"><option value="">선택 안함</option><option>승현반</option><option>소영반</option><option>현주반</option><option>현승반</option><option>미리반</option><option>정식반</option></select></label>
-        <label>2교시 <select class="read full" data-day="2/3(화)" data-period="2"><option value="">선택 안함</option><option>승현반</option><option>소영반</option><option>현주반</option><option>현승반</option><option>미리반</option><option>정식반</option></select></label>
-        <label>3교시 <select class="read full" data-day="2/3(화)" data-period="3"><option value="">선택 안함</option><option>승현반</option><option>소영반</option><option>현주반</option><option>현승반</option><option>미리반</option><option>정식반</option></select></label>
-        <label>4교시 <select class="read full" data-day="2/3(화)" data-period="4"><option value="">선택 안함</option><option>승현반</option><option>소영반</option><option>현주반</option><option>현승반</option><option>미리반</option><option>정식반</option></select></label>
+        <label>1교시 <select class="read full" data-day="2/3(화)" data-period="1"><option>선택 안함</option><option>승현반</option><option>소영반</option><option>현주반</option><option>현승반</option><option>미리반</option><option>정식반</option></select></label>
+        <label>2교시 <select class="read full" data-day="2/3(화)" data-period="2"><option>선택 안함</option><option>승현반</option><option>소영반</option><option>현주반</option><option>현승반</option><option>미리반</option><option>정식반</option></select></label>
+        <label>3교시 <select class="read full" data-day="2/3(화)" data-period="3"><option>선택 안함</option><option>승현반</option><option>소영반</option><option>현주반</option><option>현승반</option><option>미리반</option><option>정식반</option></select></label>
+        <label>4교시 <select class="read full" data-day="2/3(화)" data-period="4"><option>선택 안함</option><option>승현반</option><option>소영반</option><option>현주반</option><option>현승반</option><option>미리반</option><option>정식반</option></select></label>
       </div>
 
+      <!-- 2/5 -->
       <div class="reading-row"><strong>2/5(목):</strong>
-        <label>1교시 <select class="read full" data-day="2/5(목)" data-period="1"><option value="">선택 안함</option><option>승현반</option><option>소영반</option><option>현주반</option><option>현승반</option><option>미리반</option><option>정식반</option></select></label>
-        <label>2교시 <select class="read full" data-day="2/5(목)" data-period="2"><option value="">선택 안함</option><option>승현반</option><option>소영반</option><option>현주반</option><option>현승반</option><option>미리반</option><option>정식반</option></select></label>
-        <label>3교시 <select class="read full" data-day="2/5(목)" data-period="3"><option value="">선택 안함</option><option>승현반</option><option>소영반</option><option>현주반</option><option>현승반</option><option>미리반</option><option>정식반</option></select></label>
+        <label>1교시 <select class="read full" data-day="2/5(목)" data-period="1"><option>선택 안함</option><option>승현반</option><option>소영반</option><option>현주반</option><option>현승반</option><option>미리반</option><option>정식반</option></select></label>
+        <label>2교시 <select class="read full" data-day="2/5(목)" data-period="2"><option>선택 안함</option><option>승현반</option><option>소영반</option><option>현주반</option><option>현승반</option><option>미리반</option><option>정식반</option></select></label>
+        <label>3교시 <select class="read full" data-day="2/5(목)" data-period="3"><option>선택 안함</option><option>승현반</option><option>소영반</option><option>현주반</option><option>현승반</option><option>미리반</option><option>정식반</option></select></label>
       </div>
     </div>
     <div id="readMsg" class="status" aria-live="polite"></div>
@@ -174,11 +229,11 @@
     </div>
     <table>
       <tr><th>날짜</th><th>선택 수업</th></tr>
-      <tr><td>1/26(월) 5교시</td><td><select class="selDay" id="sel-0126"><option value="">과목 선택</option><option>선택1</option><option>선택2</option><option>선택3</option><option>선택4</option><option>선택5</option><option>선택6</option></select></td></tr>
-      <tr><td>1/27(화) 5교시</td><td><select class="selDay" id="sel-0127"><option value="">과목 선택</option><option>선택1</option><option>선택2</option><option>선택3</option><option>선택4</option><option>선택5</option><option>선택6</option></select></td></tr>
-      <tr><td>1/28(수) 5교시</td><td><select class="selDay" id="sel-0128"><option value="">과목 선택</option><option>선택1</option><option>선택2</option><option>선택3</option><option>선택4</option><option>선택5</option><option>선택6</option></select></td></tr>
-      <tr><td>1/29(목) 5교시</td><td><select class="selDay" id="sel-0129"><option value="">과목 선택</option><option>선택1</option><option>선택2</option><option>선택3</option><option>선택4</option><option>선택5</option><option>선택6</option></select></td></tr>
-      <tr><td>2/2(월) 4교시</td><td><select class="selDay" id="sel-0202"><option value="">과목 선택</option><option>선택1</option><option>선택2</option><option>선택3</option><option>선택4</option><option>선택5</option><option>선택6</option></select></td></tr>
+      <tr><td>1/26(월) 5교시</td><td><select class="selDay" id="sel-0126"><option>과목 선택</option><option>선택1</option><option>선택2</option><option>선택3</option><option>선택4</option><option>선택5</option><option>선택6</option></select></td></tr>
+      <tr><td>1/27(화) 5교시</td><td><select class="selDay" id="sel-0127"><option>과목 선택</option><option>선택1</option><option>선택2</option><option>선택3</option><option>선택4</option><option>선택5</option><option>선택6</option></select></td></tr>
+      <tr><td>1/28(수) 5교시</td><td><select class="selDay" id="sel-0128"><option>과목 선택</option><option>선택1</option><option>선택2</option><option>선택3</option><option>선택4</option><option>선택5</option><option>선택6</option></select></td></tr>
+      <tr><td>1/29(목) 5교시</td><td><select class="selDay" id="sel-0129"><option>과목 선택</option><option>선택1</option><option>선택2</option><option>선택3</option><option>선택4</option><option>선택5</option><option>선택6</option></select></td></tr>
+      <tr><td>2/2(월) 4교시</td><td><select class="selDay" id="sel-0202"><option>과목 선택</option><option>선택1</option><option>선택2</option><option>선택3</option><option>선택4</option><option>선택5</option><option>선택6</option></select></td></tr>
     </table>
     <div id="selMsg" class="status" aria-live="polite"></div>
   </fieldset>
@@ -192,13 +247,168 @@
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script>
-    // Supabase kept as requested
     const SUPABASE_URL = 'https://metdfyhhcvvjmkkwyvcf.supabase.co';
     const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1ldGRmeWhoY3Z2am1ra3d5dmNmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjQ5OTQzOTUsImV4cCI6MjA4MDU3MDM5NX0.vcC6tjeYU9CQlC92jJOKgcf3cR0t36g5J19pk2uQrDs';
     const { createClient } = window.supabase;
     const supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-    // Utility helpers
+    function escapeHtml(s){ if (s===null||s===undefined) return ''; return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;'); }
+    function stripSeatSuffix(s){ if (s === null || s === undefined) return ''; return String(s).replace(/\s*(\(|（)\s*(남은\s*)?\d+\s*석\s*(\)|）)\s*$/i, '').trim(); }
+
+    // Initialize: set stable base labels and stable opt.value for non-placeholder options.
+    function initializeStableOptions() {
+      document.querySelectorAll('select').forEach(sel=>{
+        Array.from(sel.options).forEach(opt=>{
+          if (opt.dataset.baseLabel === undefined) {
+            const base = stripSeatSuffix(opt.textContent || '');
+            opt.dataset.baseLabel = base;
+            // treat placeholder-like texts as empty values
+            if (/^(과목\s?선택|선택\s?안함|)$/i.test(base)) {
+              opt.value = '';
+              opt.setAttribute('value','');
+              opt.dataset.placeholder = '1';
+            } else {
+              // keep stable base value (clean label)
+              opt.value = base;
+              opt.setAttribute('value', base);
+            }
+          }
+        });
+      });
+    }
+
+    // Refresh remaining seats for read/sel and add labels for mov/lou/bible checkboxes
+    async function refreshReadAndSelRemaining() {
+      try {
+        // get current student id (optional, used so server excludes current student's registrations)
+        const cls = document.getElementById('cls').value.trim();
+        const name = document.getElementById('name').value.trim();
+        const currentStudentId = (cls && name) ? (await supabaseClient.from('students').select('student_id').eq('class', cls).eq('name', name).limit(1)).data?.[0]?.student_id || null : null;
+
+        const { data, error } = await supabaseClient.rpc('get_remaining_capacities_expanded', { p_exclude_student_id: currentStudentId });
+        if (error) { console.error('[seats] RPC error', error); return; }
+        if (!Array.isArray(data) || data.length === 0) return;
+
+        const aliasMap = new Map();
+        const normalize = s => (s===null||s===undefined) ? '' : String(s).replace(/[（）]/g, c => c==='（'?'(':')').replace(/\s+/g,' ').trim().toLowerCase();
+        data.forEach(r => {
+          const raw = String(r.course_capacity_id || '');
+          const rec = { original_id: r.original_capacity_id, remaining: Number(r.remaining||0), max_capacity: Number(r.max_capacity||0), current_count: Number(r.current_count||0), alias: raw };
+          aliasMap.set(normalize(raw), rec);
+          aliasMap.set(raw, rec);
+        });
+        const lookup = key => { if (key === null || key === undefined) return null; const norm = normalize(key); return aliasMap.get(norm) || aliasMap.get(key) || null; };
+
+        // selDay updates
+        const dayNames = {'sel-0126':'0126','sel-0127':'0127','sel-0128':'0128','sel-0129':'0129','sel-0202':'0202'};
+        Object.entries(dayNames).forEach(([selId, day])=>{
+          const sel = document.getElementById(selId);
+          if (!sel) return;
+          const focused = (document.activeElement === sel);
+          Array.from(sel.options).forEach(opt=>{
+            if (!opt.dataset.baseLabel) opt.dataset.baseLabel = stripSeatSuffix(opt.textContent || '');
+            const val = (opt.dataset.placeholder ? '' : (opt.value && opt.value.trim()));
+            if (!val) { opt.textContent = opt.dataset.baseLabel; return; }
+            const candidates = [`select_${day}_${val}`, val];
+            let rec = null;
+            for (const k of candidates) { rec = lookup(k); if (rec) break; }
+            if (rec) {
+              opt.textContent = `${opt.dataset.baseLabel} (남은 ${rec.remaining}석)`;
+              const shouldDisable = (rec.remaining <= 0);
+              if (!focused) opt.disabled = shouldDisable;
+              opt.setAttribute('aria-disabled', shouldDisable ? 'true' : 'false');
+            } else {
+              opt.textContent = opt.dataset.baseLabel;
+            }
+          });
+        });
+
+        // read selects updates
+        document.querySelectorAll('.read').forEach(sel=>{
+          const focused = (document.activeElement === sel);
+          Array.from(sel.options).forEach(opt=>{
+            if (!opt.dataset.baseLabel) opt.dataset.baseLabel = stripSeatSuffix(opt.textContent || '');
+            const val = (opt.dataset.placeholder ? '' : (opt.value && opt.value.trim()));
+            if (!val) { opt.textContent = opt.dataset.baseLabel; return; }
+            const day = sel.dataset.day;
+            const period = sel.dataset.period;
+            const candidates = [
+              `책 읽기_${day}_${period}교시_${val}`,
+              `책읽기_${day}_${period}교시_${val}`,
+              val
+            ];
+            let rec = null;
+            for (const k of candidates) { rec = lookup(k); if (rec) break; }
+            if (rec) {
+              opt.textContent = `${opt.dataset.baseLabel} (남은 ${rec.remaining}석)`;
+              const shouldDisable = (rec.remaining <= 0);
+              if (!focused) opt.disabled = shouldDisable;
+              opt.setAttribute('aria-disabled', shouldDisable ? 'true' : 'false');
+            } else {
+              opt.textContent = opt.dataset.baseLabel;
+            }
+          });
+        });
+
+        // mov/lou/bible checkbox labels
+        document.querySelectorAll('.mov, .lou, .bible').forEach(cb=>{
+          const label = cb.closest('label');
+          if (!label) return;
+          let span = label.querySelector('.cap-info');
+          if (!span) { span = document.createElement('span'); span.className = 'cap-info'; label.appendChild(span); }
+
+          let candidates = [];
+          if (cb.classList.contains('mov')) {
+            const blk = (Number(cb.dataset.start) === 1) ? '1-2교시' : '3-4교시';
+            candidates = [
+              `movie_${cb.dataset.day}_${blk}`,
+              `movie_${cb.dataset.day}_${blk.replace('교시','')}`,
+              `movie_${cb.dataset.day}_${cb.dataset.start}`,
+              `영화_${cb.dataset.day}_${blk}`
+            ];
+          } else if (cb.classList.contains('lou')) {
+            candidates = [
+              `마네_${cb.dataset.day}_${cb.dataset.period}교시`,
+              `마네_${cb.dataset.day}_${cb.dataset.period}`,
+              `mane_${cb.dataset.day}_${cb.dataset.period}교시`
+            ];
+          } else if (cb.classList.contains('bible')) {
+            candidates = [
+              `bible_${cb.dataset.day}_${cb.dataset.period}교시`,
+              `bible_${cb.dataset.day}_${cb.dataset.period}`,
+              `성경동화_${cb.dataset.day}_${cb.dataset.period}교시`
+            ];
+          }
+
+          let rec = null;
+          for (const k of candidates) { rec = lookup(k); if (rec) break; }
+          if (rec) {
+            span.textContent = ` (남은 ${rec.remaining}석)`;
+            const shouldDisable = (rec.remaining <= 0);
+            cb.disabled = shouldDisable;
+            if (shouldDisable) label.classList.add('disabled'); else label.classList.remove('disabled');
+          } else {
+            span.textContent = '';
+          }
+        });
+
+      } catch (err) {
+        console.error('[seats] unexpected error', err);
+      }
+    }
+
+    // Polling
+    let seatsIntervalHandle = null;
+    function startSeatsPolling(intervalMs = 5000){
+      if (seatsIntervalHandle) clearInterval(seatsIntervalHandle);
+      initializeStableOptions();
+      refreshReadAndSelRemaining().then(()=> {
+        seatsIntervalHandle = setInterval(refreshReadAndSelRemaining, intervalMs);
+      });
+    }
+    function stopSeatsPolling(){ if (seatsIntervalHandle) clearInterval(seatsIntervalHandle); seatsIntervalHandle = null; }
+
+    // (rest of app: validation, makeTable, submitRegistration - same behavior)
     function buildScheduleOccupation() {
       const occ = {};
       function mark(day, period, type) {
@@ -212,9 +422,7 @@
       document.querySelectorAll('.lou:checked').forEach(c => mark(c.dataset.day, Number(c.dataset.period), '마네'));
       return occ;
     }
-    function escapeHtml(s){ if (s===null||s===undefined) return ''; return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;'); }
 
-    // Validation / status helpers
     function checkSelValidity() {
       const ids = ['sel-0126','sel-0127','sel-0128','sel-0129','sel-0202'];
       const vals = ids.map(id=>document.getElementById(id).value).filter(v=>v);
@@ -223,6 +431,7 @@
       else if (new Set(vals).size < 5) msg.innerHTML = '<span class="bad">모두 다른 과목이어야 합니다.</span>';
       else msg.innerHTML = '<span class="ok">조건 만족</span>';
     }
+
     function updateReadingStatus() {
       const div = document.getElementById('readMsg');
       let total=0, soy=0;
@@ -231,12 +440,14 @@
       else if (soy>7) div.innerHTML = `<span class="bad">소영반 초과 (${soy}시간)</span>`;
       else div.innerHTML = `<span class="ok">조건 만족 (${total}시간)</span>`;
     }
+
     function updateMovieStatus(){
       const movMsg = document.getElementById('movMsg');
       const cnt = document.querySelectorAll('.mov:checked').length;
       if (cnt>3) movMsg.innerHTML = '<span class="bad">영화는 최대 3회까지만 가능합니다.</span>';
       else movMsg.innerHTML = `<span class="ok">현재 ${cnt}회 선택 (최대 3회)</span>`;
     }
+
     function updateLouStatus(){
       const louMsg = document.getElementById('louMsg');
       const cnt = document.querySelectorAll('.lou:checked').length;
@@ -244,353 +455,6 @@
       else louMsg.innerHTML = `<span class="ok">현재 ${cnt}시간 선택 (최대 6시간)</span>`;
     }
 
-    // --- RPC-based safe updater ---
-    async function getCurrentStudentId() {
-      const cls = document.getElementById('cls').value.trim();
-      const name = document.getElementById('name').value.trim();
-      if (!cls || !name) return null;
-      const { data, error } = await supabaseClient.from('students').select('student_id').eq('class', cls).eq('name', name).limit(1);
-      if (error) { console.warn('학생 조회 실패', error); return null; }
-      return (data && data.length ? data[0].student_id : null);
-    }
-    async function getStudentRegisteredCapacityIds(studentId) {
-      if (!studentId) return [];
-      const { data, error } = await supabaseClient.from('registrations').select('course_capacity_id').eq('student_id', studentId);
-      if (error) { console.warn('학생 등록 목록 조회 실패', error); return []; }
-      return data.map(r => r.course_capacity_id);
-    }
-
-    let capacityPollHandle = null;
-    function startCapacityPoll() {
-      if (capacityPollHandle) clearInterval(capacityPollHandle);
-      capacityPollHandle = setInterval(() => safeUpdateCapacityDisplays(), 15000);
-    }
-    function stopCapacityPoll() { if (capacityPollHandle) clearInterval(capacityPollHandle); capacityPollHandle = null; }
-
-    // Helper: remove existing "(N석)" or "(남은 N석)" suffixes for a clean base label
-    function stripSeatSuffix(s){
-      if (!s && s !== '') return s;
-      return String(s).replace(/\s*(\(|（)\s*(남은\s*)?\d+\s*석\s*(\)|）)\s*$/i, '').trim();
-    }
-
-    async function safeUpdateCapacityDisplays() {
-      try {
-        const currentStudentId = await getCurrentStudentId();
-        const { data, error } = await supabaseClient.rpc('get_remaining_capacities_expanded', { p_exclude_student_id: currentStudentId });
-        if (error) { console.error('[capacity] RPC error', error); return; }
-        if (!Array.isArray(data) || data.length === 0) { console.warn('[capacity] RPC returned no rows; skipping update.'); return; }
-
-        // build alias map
-        const aliasMap = new Map();
-        const normalize = s => {
-          if (s === null || s === undefined) return '';
-          return String(s).replace(/[（）]/g, c => c==='（'?'(':')').replace(/\s+/g,' ').trim().toLowerCase();
-        };
-        data.forEach(r => {
-          const aliasRaw = String(r.course_capacity_id || '');
-          const aliasNorm = normalize(aliasRaw);
-          const rec = {
-            original_id: r.original_capacity_id,
-            alias: aliasRaw,
-            max_capacity: Number(r.max_capacity||0),
-            current_count: Number(r.current_count||0),
-            remaining: Number(r.remaining||0)
-          };
-          aliasMap.set(aliasNorm, rec);
-          aliasMap.set(aliasRaw, rec);
-        });
-
-        const studentRegisteredIds = currentStudentId ? await getStudentRegisteredCapacityIds(currentStudentId) : [];
-
-        const lookup = key => {
-          if (!key && key !== '') return null;
-          const norm = normalize(key);
-          return aliasMap.get(norm) || aliasMap.get(key) || null;
-        };
-
-        // Update selDay selects (선택 수업) - ensure baseLabel is clean (no previous "(N석)")
-        const dayNames = {'sel-0126':'0126','sel-0127':'0127','sel-0128':'0128','sel-0129':'0129','sel-0202':'0202'};
-        Object.entries(dayNames).forEach(([selId, day])=>{
-          const sel = document.getElementById(selId);
-          if (!sel) return;
-          Array.from(sel.options).forEach(opt=>{
-            if (opt.dataset.baseLabel === undefined) {
-              // strip any existing seat suffix when recording base label
-              opt.dataset.baseLabel = stripSeatSuffix(opt.textContent || '');
-            }
-            const val = opt.value && opt.value.trim();
-            if (!val) { opt.textContent = opt.dataset.baseLabel; return; }
-
-            // candidate keys to try
-            const candidates = [`select_${day}_${val}`, val];
-            let rec = null;
-            for (const k of candidates) { rec = lookup(k); if (rec) break; }
-            if (rec) {
-              // always update the visible text so dropdowns reflect current counts (some browsers won't update an open native select but will on next open)
-              opt.textContent = `${opt.dataset.baseLabel}(${rec.remaining}석)`;
-              const userHas = studentRegisteredIds.includes(rec.original_id);
-              const shouldDisable = (rec.remaining <= 0 && !userHas);
-              // don't change disabled while user is interacting with this select (avoid interrupting selection)
-              if (document.activeElement !== sel) {
-                opt.disabled = shouldDisable;
-              }
-              opt.setAttribute('aria-disabled', shouldDisable ? 'true' : 'false');
-            } else {
-              // keep existing (clean) text
-              opt.textContent = opt.dataset.baseLabel;
-            }
-          });
-        });
-
-        // Update .read selects (책읽기) - same robust baseLabel handling
-        document.querySelectorAll('.read').forEach(sel=>{
-          const skipDisable = (document.activeElement === sel); // avoid toggling disabled while open
-          Array.from(sel.options).forEach(opt=>{
-            if (opt.dataset.baseLabel === undefined) {
-              opt.dataset.baseLabel = stripSeatSuffix(opt.textContent || '');
-            }
-            const val = opt.value && opt.value.trim();
-            if (!val) { opt.textContent = opt.dataset.baseLabel; return; }
-            const day = sel.dataset.day;
-            const period = sel.dataset.period;
-            const candidates = [
-              `책 읽기_${day}_${period}교시_${val}`,
-              `책읽기_${day}_${period}교시_${val}`,
-              val
-            ];
-            let rec = null;
-            for (const k of candidates) { rec = lookup(k); if (rec) break; }
-            if (rec) {
-              // always update text; only toggle disabled if select not focused/open
-              opt.textContent = `${opt.dataset.baseLabel}(${rec.remaining}석)`;
-              const userHas = studentRegisteredIds.includes(rec.original_id);
-              const shouldDisable = (rec.remaining <= 0 && !userHas);
-              if (!skipDisable) opt.disabled = shouldDisable;
-              opt.setAttribute('aria-disabled', shouldDisable ? 'true' : 'false');
-            } else {
-              opt.textContent = opt.dataset.baseLabel;
-            }
-          });
-        });
-
-        // Update checkboxes (.mov, .lou, .bible) - try multiple candidates to match aliases
-        document.querySelectorAll('.mov, .lou, .bible').forEach(cb=>{
-          const label = cb.closest('label');
-          if (!label) return;
-
-          // ensure labelText span exists
-          let labelText = label.querySelector('.label-text');
-          if (!labelText) {
-            labelText = document.createElement('span');
-            labelText.className = 'label-text';
-            const textNodes = Array.from(label.childNodes).filter(n => n.nodeType === Node.TEXT_NODE && n.textContent.trim());
-            const txt = textNodes.map(n => n.textContent.trim()).join(' ');
-            label.insertBefore(labelText, label.querySelector('.cap-info') || null);
-            if (txt) labelText.textContent = txt;
-            textNodes.forEach(n => n.parentNode && n.parentNode.removeChild(n));
-          }
-
-          const day = cb.dataset.day;
-          let candidates = [];
-          let courseName = '';
-          let blk = '';
-          if (cb.classList.contains('mov')) {
-            const startNum = Number(cb.dataset.start);
-            blk = (startNum === 1) ? '1-2교시' : '3-4교시';
-            courseName = '영화 시청';
-            candidates = [
-              `movie_${day}_${blk}`,
-              `movie_${day}_${blk.replace('교시','')}`,
-              `movie_${day}_${startNum}`,
-              `movie_${day}_${startNum}-${startNum+1}`,
-              `영화_${day}_${blk}`,
-              `영화_${day}_${blk.replace('교시','')}`
-            ];
-          } else if (cb.classList.contains('lou')) {
-            blk = `${cb.dataset.period}교시`;
-            courseName = '마네';
-            candidates = [
-              `마네_${day}_${blk}`,
-              `마네_${day}_${blk.replace('교시','')}`,
-              `마네_${day}_${cb.dataset.period}`,
-              `mane_${day}_${blk}`
-            ];
-          } else if (cb.classList.contains('bible')) {
-            blk = `${cb.dataset.period}교시`;
-            courseName = '성경동화';
-            candidates = [
-              `bible_${day}_${blk}`,
-              `bible_${day}_${blk.replace('교시','')}`,
-              `성경동화_${day}_${blk}`,
-              `성경동화_${day}_${blk.replace('교시','')}`
-            ];
-          }
-
-          let rec = null;
-          for (const k of candidates) { rec = lookup(k); if (rec) break; }
-
-          let span = label.querySelector('.cap-info');
-          if (!span) { span = document.createElement('span'); span.className = 'cap-info'; label.appendChild(span); }
-
-          if (rec) {
-            labelText.textContent = `${courseName} ${blk}`;
-            span.textContent = `(${rec.remaining}석)`;
-            const userHas = studentRegisteredIds.includes(rec.original_id);
-            const shouldDisable = (rec.remaining <= 0 && !userHas);
-            cb.disabled = shouldDisable;
-            if (shouldDisable) label.classList.add('disabled'); else label.classList.remove('disabled');
-          } else {
-            // leave as-is
-          }
-        });
-
-        console.debug('[capacity] safe update applied. rows=', data.length);
-      } catch (err) {
-        console.error('[capacity] unexpected error in safeUpdateCapacityDisplays', err);
-      }
-    }
-
-    // Robust listeners and main flow
-    document.addEventListener('DOMContentLoaded', () => {
-      // attach event handlers for selects/checkboxes
-      document.querySelectorAll('.read').forEach(sel => {
-        const onChangeHandler = function(){
-          setTimeout(() => {
-            const day = this.dataset.day, period = Number(this.dataset.period);
-            if (this.value) {
-              const occ = buildScheduleOccupation();
-              if (occ[day] && occ[day][period] && occ[day][period].some(t => t !== '책읽기')) {
-                this.value = '';
-                document.getElementById('readMsg').innerHTML = `<span class="bad">${day} ${period}교시 중복!</span>`;
-                return;
-              }
-            }
-            updateReadingStatus();
-            safeUpdateCapacityDisplays();
-          }, 60);
-        };
-        sel.addEventListener('change', onChangeHandler, { passive: false });
-        sel.addEventListener('blur', onChangeHandler, { passive: false });
-        sel.addEventListener('touchend', onChangeHandler, { passive: false });
-        sel.addEventListener('pointerup', onChangeHandler, { passive: false });
-
-        sel.addEventListener('focus', () => safeUpdateCapacityDisplays(), { passive: true });
-        sel.addEventListener('touchstart', () => safeUpdateCapacityDisplays(), { passive: true });
-      });
-
-      document.querySelectorAll('.bible').forEach(cb => {
-        cb.addEventListener('change', function(){
-          if (this.checked) {
-            const occ = buildScheduleOccupation();
-            const d = this.dataset.day, p = Number(this.dataset.period);
-            if (occ[d] && occ[d][p] && occ[d][p].some(t => t !== '성경동화')) {
-              this.checked = false;
-              document.getElementById('bibleMsg').innerHTML = `<span class="bad">${d} ${p}교시 중복!</span>`;
-              return;
-            }
-          }
-          const bibleChecked = document.querySelectorAll('.bible:checked').length;
-          document.getElementById('bibleMsg').innerHTML = `<span class="ok">현재 ${bibleChecked}개 선택</span>`;
-          safeUpdateCapacityDisplays();
-        }, { passive: false });
-
-        const lbl = cb.closest('label');
-        if (lbl) { lbl.addEventListener('mouseenter', () => safeUpdateCapacityDisplays(), { passive: true }); lbl.addEventListener('focusin', () => safeUpdateCapacityDisplays(), { passive: true }); }
-      });
-
-      document.querySelectorAll('.mov').forEach(cb => {
-        cb.addEventListener('change', function(){
-          const day = this.dataset.day;
-          if (this.checked) {
-            document.querySelectorAll('.mov').forEach(m => { if (m !== this && m.dataset.day === day && m.checked) m.checked = false; });
-            let total = document.querySelectorAll('.mov:checked').length;
-            if (total > 3) { this.checked = false; document.getElementById('movMsg').innerHTML = '<span class="bad">영화는 최대 3회까지만 선택 가능합니다.</span>'; return; }
-            const s = Number(this.dataset.start);
-            const occ = buildScheduleOccupation();
-            for (let p of [s, s+1]) {
-              if (occ[this.dataset.day] && occ[this.dataset.day][p] && occ[this.dataset.day][p].some(t => t !== '영화')) {
-                this.checked = false;
-                alert(`${this.dataset.day} ${p}교시는 이미 다른 수업이 있습니다.`);
-                return;
-              }
-            }
-          }
-          updateMovieStatus();
-          safeUpdateCapacityDisplays();
-        }, { passive: false });
-        const lbl = cb.closest('label');
-        if (lbl) { lbl.addEventListener('mouseenter', () => safeUpdateCapacityDisplays(), { passive: true }); lbl.addEventListener('focusin', () => safeUpdateCapacityDisplays(), { passive: true }); }
-      });
-
-      document.querySelectorAll('.lou').forEach(cb => {
-        cb.addEventListener('change', function(){
-          const day = this.dataset.day;
-          if (this.checked) {
-            document.querySelectorAll('.lou').forEach(x => { if (x !== this && x.dataset.day === day && x.checked) x.checked = false; });
-            const totalLou = document.querySelectorAll('.lou:checked').length;
-            if (totalLou > 6) { this.checked = false; document.getElementById('louMsg').innerHTML = '<span class="bad">마네는 최대 6시간까지만 선택 가능합니다.</span>'; return; }
-            const occ = buildScheduleOccupation();
-            const p = Number(this.dataset.period);
-            if (occ[this.dataset.day] && occ[this.dataset.day][p] && occ[this.dataset.day][p].some(t => t !== '마네')) {
-              this.checked = false;
-              alert(`${this.dataset.day} ${p}교시는 이미 다른 수업이 있습니다.`);
-              return;
-            }
-          }
-          updateLouStatus();
-          safeUpdateCapacityDisplays();
-        }, { passive: false });
-        const lbl = cb.closest('label');
-        if (lbl) { lbl.addEventListener('mouseenter', () => safeUpdateCapacityDisplays(), { passive: true }); lbl.addEventListener('focusin', () => safeUpdateCapacityDisplays(), { passive: true }); }
-      });
-
-      document.querySelectorAll('.selDay').forEach(s => {
-        s.addEventListener('change', checkSelValidity, { passive: true });
-        s.addEventListener('focus', () => safeUpdateCapacityDisplays(), { passive: true });
-        s.addEventListener('touchstart', () => safeUpdateCapacityDisplays(), { passive: true });
-      });
-
-      // make/submit buttons
-      const makeBtn = document.getElementById('makeBtn');
-      makeBtn.addEventListener('click', function(e){ e.preventDefault(); makeTable(); }, { passive: false });
-      makeBtn.addEventListener('pointerup', function(e){ e.preventDefault(); makeTable(); }, { passive: false });
-      document.getElementById('submitBtn').addEventListener('click', function(e){ e.preventDefault(); submitRegistration(); }, { passive: false });
-
-      // initial statuses and start poll
-      checkSelValidity(); updateReadingStatus(); updateMovieStatus(); updateLouStatus();
-      safeUpdateCapacityDisplays().then(() => startCapacityPoll());
-
-      window.addEventListener('beforeunload', () => stopCapacityPoll());
-      console.log('UI initialized. userAgent=', navigator.userAgent);
-    });
-
-    // makeTable
-    function makeTable(){
-      const cls = document.getElementById('cls').value.trim();
-      const name = document.getElementById('name').value.trim();
-      if (!cls || !name) { alert('반과 이름을 입력하세요.'); return; }
-      const periods=[1,2,3,4,5];
-      const days=["1/26(월)","1/27(화)","1/28(수)","1/29(목)","1/30(금)","2/2(월)","2/3(화)","2/5(목)"];
-      const tableData={}; days.forEach(d=>{ tableData[d]={}; periods.forEach(p=>tableData[d][p]=""); });
-      document.querySelectorAll('.read').forEach(s=>{ if(s.value && tableData[s.dataset.day]) tableData[s.dataset.day][s.dataset.period] = `책읽기(${s.value})`; });
-      document.querySelectorAll('.bible:checked').forEach(c=>{ if(tableData[c.dataset.day]) tableData[c.dataset.day][c.dataset.period] = "성경동화"; });
-      document.querySelectorAll('.mov:checked').forEach(c=>{ const s = Number(c.dataset.start); if(tableData[c.dataset.day]) { tableData[c.dataset.day][s] = "영화"; tableData[c.dataset.day][s+1] = "영화"; }});
-      document.querySelectorAll('.lou:checked').forEach(c=>{ if(tableData[c.dataset.day]) tableData[c.dataset.day][c.dataset.period] = "마네"; });
-
-      ['0126','0127','0128','0129'].forEach((k,i)=>{ const d = days[i]; const val = document.getElementById(`sel-${k}`).value; if(val && tableData[d]) tableData[d][5] = `선택수업(${val})`; });
-      const sel0202 = document.getElementById('sel-0202').value; if(sel0202 && tableData["2/2(월)"]) tableData["2/2(월)"][4] = `선택수업(${sel0202})`;
-
-      let html = `<h3>${escapeHtml(cls)} ${escapeHtml(name)} 시간표</h3><div class="table-wrapper"><table><tr><th>교시/날짜</th>`;
-      days.forEach(d=>html += `<th>${escapeHtml(d)}</th>`); html += `</tr>`;
-      periods.forEach(p=>{ html += `<tr><th>${p}교시</th>`; days.forEach(d=>{ const rawVal = tableData[d][p] || ''; const val = (typeof rawVal === 'string') ? rawVal : String(rawVal); let cName=''; if (val.trim().startsWith('책읽기')) cName='cell-read'; else if (val==='영화') cName='cell-movie'; else if (val==='마네') cName='cell-lounge'; else if (val==='성경동화') cName='cell-bible'; html += `<td class="${cName}">${escapeHtml(val)}</td>` }); html += `</tr>` });
-      html += `</table></div>`;
-      document.getElementById('result').innerHTML = html;
-
-      updateReadingStatus(); updateMovieStatus(); updateLouStatus(); checkSelValidity();
-      safeUpdateCapacityDisplays();
-    }
-
-    // generateCapacityIds
     function generateCapacityIds(){
       const ids=[];
       const dayNames={'sel-0126':'0126','sel-0127':'0127','sel-0128':'0128','sel-0129':'0129','sel-0202':'0202'};
@@ -602,7 +466,6 @@
       return [...new Set(ids)];
     }
 
-    // submitRegistration
     async function submitRegistration(){
       const btn = document.getElementById('submitBtn');
       const cls = document.getElementById('cls').value.trim();
@@ -612,7 +475,6 @@
       if (courseIds.length === 0) { alert('선택한 수업이 없습니다.'); return; }
       btn.disabled = true; btn.textContent = '제출 중...';
       try {
-        // 학생 조회/생성
         const { data: studentData, error: selectError } = await supabaseClient.from('students').select('student_id').eq('class', cls).eq('name', name);
         if (selectError) throw new Error('학생 조회 실패: ' + selectError.message);
         let studentId;
@@ -623,13 +485,11 @@
           studentId = insertData.student_id;
         }
 
-        // existing regs
         const { data: existingRegs, error: existingError } = await supabaseClient.from('registrations').select('registration_id, course_capacity_id').eq('student_id', studentId);
         if (existingError) throw new Error('중복 조회 실패: ' + existingError.message);
         const existingCourseIds = existingRegs ? existingRegs.map(r => r.course_capacity_id) : [];
         const isUpdate = existingCourseIds.length > 0;
 
-        // capacity check against DB
         const ACTUAL_CAPACITY_COLUMN_NAME = 'max_capacity';
         for (const courseId of courseIds) {
           const { data: capacityData, error: capacityError } = await supabaseClient.from('course_capacity').select(ACTUAL_CAPACITY_COLUMN_NAME).eq('id', courseId);
@@ -656,7 +516,7 @@
 
         if (isUpdate) alert('수정되었습니다'); else alert('✅ 신청 완료!');
         makeTable();
-        await safeUpdateCapacityDisplays();
+        refreshReadAndSelRemaining();
       } catch (err) {
         console.error(err);
         alert('❌ ' + (err.message || err));
@@ -664,6 +524,129 @@
         btn.disabled = false; btn.textContent = '최종 수강 신청 (DB 저장)';
       }
     }
+
+    function makeTable(){
+      const cls = document.getElementById('cls').value.trim();
+      const name = document.getElementById('name').value.trim();
+      if (!cls || !name) { alert('반과 이름을 입력하세요.'); return; }
+      const periods=[1,2,3,4,5];
+      const days=["1/26(월)","1/27(화)","1/28(수)","1/29(목)","1/30(금)","2/2(월)","2/3(화)","2/5(목)"];
+      const tableData={}; days.forEach(d=>{ tableData[d]={}; periods.forEach(p=>tableData[d][p]=""); });
+      document.querySelectorAll('.read').forEach(s=>{ if(s.value && tableData[s.dataset.day]) tableData[s.dataset.day][s.dataset.period] = `책읽기(${s.value})`; });
+      document.querySelectorAll('.bible:checked').forEach(c=>{ if(tableData[c.dataset.day]) tableData[c.dataset.day][c.dataset.period] = "성경동화"; });
+      document.querySelectorAll('.mov:checked').forEach(c=>{ const s = Number(c.dataset.start); if(tableData[c.dataset.day]) { tableData[c.dataset.day][s] = "영화"; tableData[c.dataset.day][s+1] = "영화"; }});
+      document.querySelectorAll('.lou:checked').forEach(c=>{ if(tableData[c.dataset.day]) tableData[c.dataset.day][c.dataset.period] = "마네"; });
+
+      ['0126','0127','0128','0129'].forEach((k,i)=>{ const d = days[i]; const val = document.getElementById(`sel-${k}`).value; if(val && tableData[d]) tableData[d][5] = `선택수업(${val})`; });
+      const sel0202 = document.getElementById('sel-0202').value; if(sel0202 && tableData["2/2(월)"]) tableData["2/2(월)"][4] = `선택수업(${sel0202})`;
+
+      let html = `<h3>${escapeHtml(cls)} ${escapeHtml(name)} 시간표</h3><div class="table-wrapper"><table><tr><th>교시/날짜</th>`;
+      days.forEach(d=>html += `<th>${escapeHtml(d)}</th>`); html += `</tr>`;
+      periods.forEach(p=>{ html += `<tr><th>${p}교시</th>`; days.forEach(d=>{ const rawVal = tableData[d][p] || ''; const val = (typeof rawVal === 'string') ? rawVal : String(rawVal); let cName=''; if (val.trim().startsWith('책읽기')) cName='cell-read'; else if (val==='영화') cName='cell-movie'; else if (val==='마네') cName='cell-lounge'; else if (val==='성경동화') cName='cell-bible'; html += `<td class="${cName}">${escapeHtml(val)}</td>` }); html += `</tr>` });
+      html += `</table></div>`;
+      document.getElementById('result').innerHTML = html;
+
+      updateReadingStatus(); updateMovieStatus(); updateLouStatus(); checkSelValidity();
+      refreshReadAndSelRemaining();
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      initializeStableOptions();
+
+      document.querySelectorAll('.read').forEach(sel => {
+        const onChangeHandler = function(){
+          setTimeout(() => {
+            const day = this.dataset.day, period = Number(this.dataset.period);
+            if (this.value) {
+              const occ = buildScheduleOccupation();
+              if (occ[day] && occ[day][period] && occ[day][period].some(t => t !== '책읽기')) {
+                this.value = '';
+                document.getElementById('readMsg').innerHTML = `<span class="bad">${day} ${period}교시 중복!</span>`;
+                return;
+              }
+            }
+            updateReadingStatus();
+            refreshReadAndSelRemaining();
+          }, 60);
+        };
+        sel.addEventListener('change', onChangeHandler, { passive: false });
+        sel.addEventListener('blur', onChangeHandler, { passive: false });
+        sel.addEventListener('touchend', onChangeHandler, { passive: false });
+        sel.addEventListener('pointerup', onChangeHandler, { passive: false });
+        sel.addEventListener('focus', () => refreshReadAndSelRemaining(), { passive: true });
+      });
+
+      document.querySelectorAll('.bible').forEach(cb => {
+        cb.addEventListener('change', function(){
+          if (this.checked) {
+            const occ = buildScheduleOccupation();
+            const d = this.dataset.day, p = Number(this.dataset.period);
+            if (occ[d] && occ[d][p] && occ[d][p].some(t => t !== '성경동화')) {
+              this.checked = false;
+              document.getElementById('bibleMsg').innerHTML = `<span class="bad">${d} ${p}교시 중복!</span>`;
+              return;
+            }
+          }
+          const bibleChecked = document.querySelectorAll('.bible:checked').length;
+          document.getElementById('bibleMsg').innerHTML = `<span class="ok">현재 ${bibleChecked}개 선택</span>`;
+        }, { passive: false });
+      });
+
+      document.querySelectorAll('.mov').forEach(cb => {
+        cb.addEventListener('change', function(){
+          const day = this.dataset.day;
+          if (this.checked) {
+            document.querySelectorAll('.mov').forEach(m => { if (m !== this && m.dataset.day === day && m.checked) m.checked = false; });
+            let total = document.querySelectorAll('.mov:checked').length;
+            if (total > 3) { this.checked = false; document.getElementById('movMsg').innerHTML = '<span class="bad">영화는 최대 3회까지만 선택 가능합니다.</span>'; return; }
+            const s = Number(this.dataset.start);
+            const occ = buildScheduleOccupation();
+            for (let p of [s, s+1]) {
+              if (occ[this.dataset.day] && occ[this.dataset.day][p] && occ[this.dataset.day][p].some(t => t !== '영화')) {
+                this.checked = false;
+                alert(`${this.dataset.day} ${p}교시는 이미 다른 수업이 있습니다.`);
+                return;
+              }
+            }
+          }
+          updateMovieStatus();
+        }, { passive: false });
+      });
+
+      document.querySelectorAll('.lou').forEach(cb => {
+        cb.addEventListener('change', function(){
+          const day = this.dataset.day;
+          if (this.checked) {
+            document.querySelectorAll('.lou').forEach(x => { if (x !== this && x.dataset.day === day && x.checked) x.checked = false; });
+            const totalLou = document.querySelectorAll('.lou:checked').length;
+            if (totalLou > 6) { this.checked = false; document.getElementById('louMsg').innerHTML = '<span class="bad">마네는 최대 6시간까지만 선택 가능합니다.</span>'; return; }
+            const occ = buildScheduleOccupation();
+            const p = Number(this.dataset.period);
+            if (occ[this.dataset.day] && occ[this.dataset.day][p] && occ[this.dataset.day][p].some(t => t !== '마네')) {
+              this.checked = false;
+              alert(`${this.dataset.day} ${p}교시는 이미 다른 수업이 있습니다.`);
+              return;
+            }
+          }
+          updateLouStatus();
+        }, { passive: false });
+      });
+
+      document.querySelectorAll('.selDay').forEach(s => {
+        s.addEventListener('change', checkSelValidity, { passive: true });
+        s.addEventListener('focus', () => refreshReadAndSelRemaining(), { passive: true });
+      });
+
+      document.getElementById('makeBtn').addEventListener('click', function(e){ e.preventDefault(); makeTable(); }, { passive: false });
+      document.getElementById('makeBtn').addEventListener('pointerup', function(e){ e.preventDefault(); makeTable(); }, { passive: false });
+      document.getElementById('submitBtn').addEventListener('click', function(e){ e.preventDefault(); submitRegistration(); }, { passive: false });
+
+      checkSelValidity(); updateReadingStatus(); updateMovieStatus(); updateLouStatus();
+
+      startSeatsPolling(5000);
+      window.addEventListener('beforeunload', () => stopSeatsPolling());
+      console.log('App initialized and remaining-seat refresh started.');
+    });
   </script>
 </body>
 </html>
