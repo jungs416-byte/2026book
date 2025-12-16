@@ -835,6 +835,21 @@
       return [...new Set(ids)];
     }
 
+    // New helper: count total 소영반 selections across all .read selects
+    function countSoYoungSelections() {
+      let cnt = 0;
+      document.querySelectorAll('.read').forEach(sel => {
+        const idx = sel.selectedIndex;
+        if (idx >= 0) {
+          const opt = sel.options[idx];
+          const isPlaceholder = opt && opt.dataset && opt.dataset.placeholder === '1';
+          const val = opt && opt.value ? String(opt.value).trim() : '';
+          if (!isPlaceholder && val !== '' && val.replace(/\s+/g,'').toLowerCase() === '소영반') cnt++;
+        }
+      });
+      return cnt;
+    }
+
     async function submitRegistration(){
       const btn = document.getElementById('submitBtn');
       const cls = document.getElementById('cls').value.trim();
@@ -867,6 +882,13 @@
       const selVals = selIds.map(id => (document.getElementById(id) ? document.getElementById(id).value : '')).filter(v => v);
       if (selVals.length < 5 || new Set(selVals).size < 5) {
         alert('선택수업 확인 부탁합니다.');
+        return;
+      }
+
+      // Enforce 소영반 <= 6 before submitting
+      const soyoungCount = countSoYoungSelections();
+      if (soyoungCount > 6) {
+        alert('소영반은 전체 기간 동안 최대 6회까지 선택할 수 있습니다.');
         return;
       }
 
@@ -963,6 +985,9 @@
 
       // 책읽기: popup alert on overlap (instead of inline red text)
       document.querySelectorAll('.read').forEach(sel => {
+        // store initial previous value for revert logic
+        sel.dataset.prevValue = sel.value || '';
+
         const onChangeHandler = function(){
           setTimeout(() => {
             const day = this.dataset.day, period = Number(this.dataset.period);
@@ -971,6 +996,38 @@
               const opt = this.options[idx];
               const isPlaceholder = opt && opt.dataset && opt.dataset.placeholder === '1';
               const val = opt && opt.value ? String(opt.value).trim() : '';
+
+              // New: enforce global 소영반 limit (max 6)
+              // compute how many 소영반 would be selected after this change
+              let newCount = 0;
+              document.querySelectorAll('.read').forEach(s2 => {
+                const i2 = s2.selectedIndex;
+                if (i2 >= 0) {
+                  const o2 = s2.options[i2];
+                  const isPlaceholder2 = o2 && o2.dataset && o2.dataset.placeholder === '1';
+                  const v2 = o2 && o2.value ? String(o2.value).trim() : '';
+                  // for the element being changed, consider its new value (val)
+                  if (s2 === this) {
+                    if (!isPlaceholder && val !== '' && val.replace(/\s+/g,'').toLowerCase() === '소영반') newCount++;
+                  } else {
+                    if (!isPlaceholder2 && v2 !== '' && v2.replace(/\s+/g,'').toLowerCase() === '소영반') newCount++;
+                  }
+                }
+              });
+              if (newCount > 6) {
+                // revert to previous selection
+                const prev = this.dataset.prevValue || '';
+                // find option index that matches prev value, otherwise select first (placeholder)
+                let foundIndex = 0;
+                for (let i=0;i<this.options.length;i++){
+                  if ((this.options[i].value || '').trim() === prev) { foundIndex = i; break; }
+                }
+                this.selectedIndex = foundIndex;
+                alert('소영반은 전체 기간 동안 최대 6회까지 선택할 수 있습니다.');
+                updateReadingStatus();
+                return;
+              }
+
               if (!isPlaceholder && val !== '') {
                 const occ = buildScheduleOccupation();
                 if (occ[day] && occ[day][period] && occ[day][period].some(t => t !== '책읽기')) {
@@ -984,6 +1041,8 @@
                 }
               }
             }
+            // update prevValue after successful change
+            this.dataset.prevValue = (this.value || '');
             updateReadingStatus();
             refreshReadAndSelRemaining();
           }, 60);
@@ -992,7 +1051,11 @@
         sel.addEventListener('blur', onChangeHandler, { passive: false });
         sel.addEventListener('touchend', onChangeHandler, { passive: false });
         sel.addEventListener('pointerup', onChangeHandler, { passive: false });
-        sel.addEventListener('focus', () => refreshReadAndSelRemaining(), { passive: true });
+        sel.addEventListener('focus', () => {
+          // update previous value on focus (so we can revert if needed)
+          sel.dataset.prevValue = sel.value || '';
+          refreshReadAndSelRemaining();
+        }, { passive: true });
       });
 
       // 성경동화: popup alert on overlap (keeps behavior)
