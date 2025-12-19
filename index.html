@@ -16,16 +16,22 @@
     th,td{border:1px solid var(--border-color);padding:8px;text-align:center;font-size:13px;word-break:break-word}
     th{background:#f7f7f7;font-weight:700}
     .table-wrapper{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid #e6e6e6;padding:6px;background:#fff}
-    td.cell-read{background:#ccffcc !important;color:#000;font-weight:600}
-    td.cell-movie{background:#ffd9b3 !important;color:#000;font-weight:600}
-    td.cell-lounge{background:#cce5ff !important;color:#000;font-weight:600}
-    td.cell-bible{background:#fff9b3 !important;color:#000;font-weight:600}
+
+    /* 색상 매핑: 영화 = 살구색, 마네 = 흐린 파랑 */
+    td.cell-read{background:#ccffcc !important;color:#000;font-weight:600}      /* 책읽기 - 연한 초록 */
+    td.cell-movie{background:#ffd2a6 !important;color:#000;font-weight:600}     /* 영화 - 살구색 */
+    td.cell-lounge{background:#cce5ff !important;color:#000;font-weight:600}    /* 마네 - 흐린 파랑 */
+    td.cell-bible{background:#fff9b3 !important;color:#000;font-weight:600}     /* 예배/식 - 연한 노랑 */
+
+    /* 추가 색상: 요청된 특정 이벤트 */
+    td.cell-book-person{background:#ffb74d !important;color:#000;font-weight:700} /* 주황 - 책과 사람(소명발표) */
+    td.cell-sports{background:#8b5a2b !important;color:#fff;font-weight:700}      /* 갈색 - 책과 운동(스케이트장) */
+
     .ok{color:var(--ok-color) !important;font-weight:700 !important}
     .bad{color:var(--bad-color) !important;font-weight:700 !important}
     .status{margin-top:6px;font-size:13px}
     .cap-info { font-size:12px; margin-left:8px; color:#444; font-weight:600; }
 
-    /* 날짜별 블록 레이아웃 */
     .date-block { border:1px solid #e0e0e0; padding:10px; margin:10px 0; border-radius:8px; background:#fafafa; }
     .date-block h3 { margin:4px 0 8px 0; font-size:15px; }
     .date-grid { display:flex; flex-wrap:wrap; gap:10px; align-items:flex-start; }
@@ -33,7 +39,6 @@
     .date-col label { display:flex; align-items:center; gap:6px; white-space:nowrap; font-size:13px; }
     .date-col select { min-width:140px; }
 
-    /* preserve reading-row/bible-row compactness */
     .reading-row, .bible-row{
       display:flex;
       gap:6px;
@@ -90,7 +95,7 @@
     <div class="row">이름: <input type="text" id="name" aria-label="이름"></div>
   </fieldset>
 
-  <!-- 날짜별 블록 -->
+  <!-- 날짜별 블록 (입력 폼 restored) -->
   <div id="scheduleByDate">
 
     <!-- 1/26 (선택수업만) -->
@@ -164,7 +169,7 @@
       </div>
     </div>
 
-    <!-- other date blocks (unchanged) -->
+    <!-- 1/28 -->
     <div class="date-block" data-day="1/28(수)">
       <h3>1/28(수)</h3>
       <div class="date-grid">
@@ -221,6 +226,7 @@
       </div>
     </div>
 
+    <!-- 1/29 -->
     <div class="date-block" data-day="1/29(목)">
       <h3>1/29(목)</h3>
       <div class="date-grid">
@@ -277,6 +283,7 @@
       </div>
     </div>
 
+    <!-- 1/30 -->
     <div class="date-block" data-day="1/30(금)">
       <h3>1/30(금)</h3>
       <div class="date-grid">
@@ -325,6 +332,7 @@
       </div>
     </div>
 
+    <!-- 2/2 -->
     <div class="date-block" data-day="2/2(월)">
       <h3>2/2(월)</h3>
       <div class="date-grid">
@@ -374,6 +382,7 @@
       </div>
     </div>
 
+    <!-- 2/3 -->
     <div class="date-block" data-day="2/3(화)">
       <h3>2/3(화)</h3>
       <div class="date-grid">
@@ -422,6 +431,19 @@
       </div>
     </div>
 
+    <!-- 2/4 (special day events only; no inputs) -->
+    <div class="date-block" data-day="2/4(수)">
+      <h3>2/4(수)</h3>
+      <div class="date-grid">
+        <div class="date-col">
+          <label>1-4교시: <strong>책과 운동(스케이트장)</strong></label>
+          <label>5-6교시: <strong>고등 졸업식</strong></label>
+          <label style="opacity:.8;font-size:12px">(고정 일정 — 선택 입력 항목 없음)</label>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2/5 -->
     <div class="date-block" data-day="2/5(목)">
       <h3>2/5(목)</h3>
       <div class="date-grid">
@@ -460,6 +482,19 @@
           <label><input type="checkbox" class="bible" data-day="2/5(목)" data-period="2">2교시 <span class="cap-info" aria-hidden="true"></span></label>
         </div>
 
+      </div>
+    </div>
+
+    <!-- 2/6 fixed events -->
+    <div class="date-block" data-day="2/6(금)">
+      <h3>2/6(금)</h3>
+      <div class="date-grid">
+        <div class="date-col">
+          <strong>종례 / 마무리</strong>
+          <label>1-2교시: <span style="font-weight:700">반별정리</span></label>
+          <label>3-4교시: <span style="font-weight:700">돋움예배</span></label>
+          <label style="opacity:0.85; font-size:12px; margin-top:6px;">(해당 시간은 고정된 일정으로 선택 항목이 없습니다.)</label>
+        </div>
       </div>
     </div>
 
@@ -520,8 +555,25 @@
       });
     }
 
+    // Remove all "승현반" options from every .read select (global removal)
+    function removeSeungHyunOptionsGlobal() {
+      document.querySelectorAll('.read').forEach(sel => {
+        for (let i = sel.options.length - 1; i >= 0; i--) {
+          const opt = sel.options[i];
+          const base = (opt.dataset && opt.dataset.baseLabel !== undefined) ? opt.dataset.baseLabel : stripSeatSuffix(opt.textContent || '');
+          if (String(base).trim() === '승현반') {
+            if (sel.selectedIndex === i) sel.selectedIndex = 0;
+            sel.remove(i);
+          }
+        }
+      });
+    }
+
     async function refreshReadAndSelRemaining() {
       try {
+        // ensure the unwanted options stay removed even after updates
+        removeSeungHyunOptionsGlobal();
+
         const cls = document.getElementById('cls').value.trim();
         const name = document.getElementById('name').value.trim();
         const currentStudentId = (cls && name) ? (await supabaseClient.from('students').select('student_id').eq('class', cls).eq('name', name).limit(1)).data?.[0]?.student_id || null : null;
@@ -590,6 +642,9 @@
             }
           });
         });
+
+        // make sure removed options remain removed after we update text/disabled status
+        removeSeungHyunOptionsGlobal();
 
         // mov/lou/bible checkbox labels
         document.querySelectorAll('.mov, .lou, .bible').forEach(cb=>{
@@ -711,16 +766,6 @@
       return occupied.size;
     }
 
-    let seatsIntervalHandle = null;
-    function startSeatsPolling(intervalMs = 5000){
-      if (seatsIntervalHandle) clearInterval(seatsIntervalHandle);
-      initializeStableOptions();
-      refreshReadAndSelRemaining().then(()=> {
-        seatsIntervalHandle = setInterval(refreshReadAndSelRemaining, intervalMs);
-      });
-    }
-    function stopSeatsPolling(){ if (seatsIntervalHandle) clearInterval(seatsIntervalHandle); seatsIntervalHandle = null; }
-
     function buildScheduleOccupation() {
       const occ = {};
       function mark(day, period, type) {
@@ -751,6 +796,261 @@
         mark(day, period, '선택수업');
       });
       return occ;
+    }
+
+    function generateCapacityIds(){
+      const ids=[];
+      const dayNames={'sel-0126':'0126','sel-0127':'0127','sel-0128':'0128','sel-0129':'0129','sel-0202':'0202'};
+      for(const [sid,day] of Object.entries(dayNames)){ const val=document.getElementById(sid).value; if(val) ids.push(`select_${day}_${val}`); }
+      document.querySelectorAll('.read').forEach(sel=>{
+        const idx = sel.selectedIndex;
+        if (idx >= 0) {
+          const opt = sel.options[idx];
+          const isPlaceholder = opt && opt.dataset && opt.dataset.placeholder === '1';
+          const val = opt && opt.value ? String(opt.value).trim() : '';
+          if (!isPlaceholder && val !== '') ids.push(`책 읽기_${sel.dataset.day}_${sel.dataset.period}교시_${val}`);
+        }
+      });
+      document.querySelectorAll('.mov:checked').forEach(cb=>{ const blk = (Number(cb.dataset.start)===1)?'1-2교시':'3-4교시'; ids.push(`movie_${cb.dataset.day}_${blk}`); });
+      document.querySelectorAll('.lou:checked').forEach(cb=>ids.push(`마네_${cb.dataset.day}_${cb.dataset.period}교시`));
+      document.querySelectorAll('.bible:checked').forEach(cb=>ids.push(`bible_${cb.dataset.day}_${cb.dataset.period}교시`));
+      return [...new Set(ids)];
+    }
+
+    // New helper: count total 소영반 selections across all .read selects
+    function countSoYoungSelections() {
+      let cnt = 0;
+      document.querySelectorAll('.read').forEach(sel => {
+        const idx = sel.selectedIndex;
+        if (idx >= 0) {
+          const opt = sel.options[idx];
+          const isPlaceholder = opt && opt.dataset && opt.dataset.placeholder === '1';
+          const val = opt && opt.value ? String(opt.value).trim() : '';
+          if (!isPlaceholder && val !== '' && val.replace(/\s+/g,'').toLowerCase() === '소영반') cnt++;
+        }
+      });
+      return cnt;
+    }
+
+    // Helper: count 영화 selections in first week (1/27 ~ 1/30)
+    function countFirstWeekMovieSelections() {
+      const FIRST_WEEK_DAYS = new Set(["1/27(화)","1/28(수)","1/29(목)","1/30(금)"]);
+      return Array.from(document.querySelectorAll('.mov:checked')).reduce((acc, m) => acc + (FIRST_WEEK_DAYS.has(m.dataset.day) ? 1 : 0), 0);
+    }
+
+    // Map label -> css class used in table
+    function getCellClassForLabel(label) {
+      if (!label) return '';
+      const l = String(label).toLowerCase();
+      if (l.includes('책과 사람')) return 'cell-book-person';
+      if (l.includes('책과 운동')) return 'cell-sports';
+      if (l.includes('영화')) return 'cell-movie';
+      if (l.includes('마네')) return 'cell-lounge';
+      if (/책읽기|책과|방학과제|책과 사람|책과/gi.test(l)) return 'cell-read';
+      if (/골든벨|독서골든벨|만국박람회/gi.test(l)) return 'cell-movie';
+      if (/두레|모임|ot|정리|스케이트장|운동/gi.test(l)) return 'cell-lounge';
+      if (/예배|졸업식/gi.test(l)) return 'cell-bible';
+      return ''; // default no color
+    }
+
+    // makeTable: build timetable with added fixed events & colors
+    function makeTable(){
+      const cls = document.getElementById('cls').value.trim();
+      const name = document.getElementById('name').value.trim();
+      if (!cls || !name) { alert('반과 이름을 입력하세요.'); return; }
+      const periods=[1,2,3,4,5,6];
+      const days=["1/26(월)","1/27(화)","1/28(수)","1/29(목)","1/30(금)","2/2(월)","2/3(화)","2/4(수)","2/5(목)","2/6(금)"];
+      const tableData={}; days.forEach(d=>{ tableData[d]={}; periods.forEach(p=>tableData[d][p]=""); });
+
+      // populate with user selections
+      document.querySelectorAll('.read').forEach(s=>{
+        const idx = s.selectedIndex;
+        if (idx >= 0) {
+          const opt = s.options[idx];
+          const isPlaceholder = opt && opt.dataset && opt.dataset.placeholder === '1';
+          const val = opt && opt.value ? String(opt.value).trim() : '';
+          if (!isPlaceholder && val !== '' && tableData[s.dataset.day]) tableData[s.dataset.day][s.dataset.period] = `책읽기(${val})`;
+        }
+      });
+      document.querySelectorAll('.bible:checked').forEach(c=>{ if(tableData[c.dataset.day]) tableData[c.dataset.day][c.dataset.period] = "성경동화"; });
+      document.querySelectorAll('.mov:checked').forEach(c=>{ const s = Number(c.dataset.start); if(tableData[c.dataset.day]) { tableData[c.dataset.day][s] = "영화"; tableData[c.dataset.day][s+1] = "영화"; }});
+      document.querySelectorAll('.lou:checked').forEach(c=>{ if(tableData[c.dataset.day]) tableData[c.dataset.day][c.dataset.period] = "마네"; });
+
+      ['0126','0127','0128','0129'].forEach((k,i)=>{ const d = days[i]; const val = document.getElementById(`sel-${k}`).value; if(val && tableData[d]) tableData[d][5] = `선택수업(${val})`; });
+      const sel0202 = document.getElementById('sel-0202').value; if(sel0202 && tableData["2/2(월)"]) tableData["2/2(월)"][4] = `선택수업(${sel0202})`;
+
+      // --- Insert fixed events per user's list ---
+      if (tableData["1/26(월)"]) {
+        tableData["1/26(월)"][1] = "시작예배";
+        tableData["1/26(월)"][2] = "OT";
+        tableData["1/26(월)"][3] = "두레별 모임1";
+        tableData["1/26(월)"][4] = tableData["1/26(월)"][4] || "책읽기";
+      }
+      if (tableData["1/27(화)"]) tableData["1/27(화)"][6] = "방학과제 예선";
+      if (tableData["1/28(수)"]) tableData["1/28(수)"][6] = "두레별 모임2";
+      if (tableData["1/29(목)"]) tableData["1/29(목)"][6] = "두레별 모임3";
+      if (tableData["1/30(금)"]) { tableData["1/30(금)"][5] = "책과 사람(소명발표)"; tableData["1/30(금)"][6] = "책과 사람(소명발표)"; }
+      if (tableData["2/2(월)"]) tableData["2/2(월)"][5] = "방학과제 본선";
+      if (tableData["2/3(화)"]) { tableData["2/3(화)"][5] = "독서골든벨"; tableData["2/3(화)"][6] = "독서골든벨"; }
+      if (tableData["2/4(수)"]) {
+        tableData["2/4(수)"][1] = "책과 운동(스케이트장)";
+        tableData["2/4(수)"][2] = "책과 운동(스케이트장)";
+        tableData["2/4(수)"][3] = "책과 운동(스케이트장)";
+        tableData["2/4(수)"][4] = "책과 운동(스케이트장)";
+        tableData["2/4(수)"][5] = "고등 졸업식";
+        tableData["2/4(수)"][6] = "고등 졸업식";
+      }
+      if (tableData["2/5(목)"]) { tableData["2/5(목)"][4] = "두레별 모임4"; tableData["2/5(목)"][5] = "만국박람회"; tableData["2/5(목)"][6] = "만국박람회"; }
+      if (tableData["2/6(금)"]) {
+        tableData["2/6(금)"][1] = tableData["2/6(금)"][1] || "반별정리";
+        tableData["2/6(금)"][2] = tableData["2/6(금)"][2] || "반별정리";
+        tableData["2/6(금)"][3] = tableData["2/6(금)"][3] || "돋움예배";
+        tableData["2/6(금)"][4] = tableData["2/6(금)"][4] || "돋움예배";
+      }
+
+      // build html with class mapping
+      let html = `<h3>${escapeHtml(cls)} ${escapeHtml(name)} 시간표</h3><div class="table-wrapper"><table><tr><th>교시/날짜</th>`;
+      days.forEach(d=> html += `<th>${escapeHtml(d)}</th>`); html += `</tr>`;
+      periods.forEach(p=>{ html += `<tr><th>${p}교시</th>`; days.forEach(d=>{
+        const rawVal = tableData[d][p] || '';
+        const val = (typeof rawVal === 'string') ? rawVal : String(rawVal);
+        const cName = getCellClassForLabel(val);
+        html += `<td class="${cName}">${escapeHtml(val)}</td>`;
+      }); html += `</tr>` });
+      html += `</table></div>`;
+      document.getElementById('result').innerHTML = html;
+
+      updateSummaryLine();
+      refreshReadAndSelRemaining();
+    }
+
+    // duplicate guard for 선택수업
+    function wireSelDayDuplicateGuard() {
+      const selIds = ['sel-0126','sel-0127','sel-0128','sel-0129','sel-0202'];
+      selIds.forEach(id => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        el.dataset.prev = el.value || '';
+        el.addEventListener('focus', function(){ this.dataset.prev = this.value || ''; }, { passive: true });
+        el.addEventListener('change', function(){
+          const prev = this.dataset.prev || '';
+          const vals = selIds.map(i => (document.getElementById(i) ? document.getElementById(i).value.trim() : '')).filter(v => v);
+          const dupFound = vals.length !== new Set(vals).size;
+          if (dupFound) {
+            this.value = prev;
+            alert('다른 선택수업을 선택하세요');
+            checkSelValidity();
+            return;
+          }
+          this.dataset.prev = this.value || '';
+          checkSelValidity();
+        }, { passive: false });
+      });
+    }
+
+    // submit registration (validation + DB) - soyoung limit updated to 10
+    async function submitRegistration(){
+      const btn = document.getElementById('submitBtn');
+      const cls = document.getElementById('cls').value.trim();
+      const name = document.getElementById('name').value.trim();
+      if (!cls || !name) { alert('반과 이름을 입력하세요.'); return; }
+
+      // per-day book reading requirements
+      const requiredDays = ["1/27(화)","1/28(수)","1/29(목)","1/30(금)","2/2(월)","2/3(화)","2/5(목)"];
+      for (const d of requiredDays) {
+        if (!hasReadOnDay(d)) {
+          alert(`${d}에 책읽기 수업을 1교시 이상 선택해야 합니다.`);
+          return;
+        }
+      }
+
+      // total book reading hours
+      const totalRead = countReadSelections();
+      if (totalRead < 14) {
+        alert(`책읽기 시간이 부족합니다. 현재 ${totalRead}시간, 14시간 이상 필요합니다.`);
+        return;
+      }
+
+      // overall scheduled periods >= 31
+      const totalScheduled = computeTotalScheduledPeriods();
+      if (totalScheduled < 31) {
+        alert('전체시간 확인하기 바랍니다');
+        return;
+      }
+
+      // 선택수업 validation
+      const selIds = ['sel-0126','sel-0127','sel-0128','sel-0129','sel-0202'];
+      const selVals = selIds.map(id => (document.getElementById(id) ? document.getElementById(id).value : '')).filter(v => v);
+      if (selVals.length < 5 || new Set(selVals).size < 5) {
+        alert('선택수업 확인 부탁합니다.');
+        return;
+      }
+
+      // Enforce 소영반 <= 10 before submitting
+      const soyoungCount = countSoYoungSelections();
+      if (soyoungCount > 10) {
+        alert('전체 기간 동안 10회 가능합니다');
+        return;
+      }
+
+      // movie limits
+      const movCnt = document.querySelectorAll('.mov:checked').length;
+      if (movCnt > 3) { alert('영화 선택 3회까지 가능합니다'); return; }
+      const firstWeekMovCnt = countFirstWeekMovieSelections();
+      if (firstWeekMovCnt > 2) { alert('첫주에 2회 시청가능합니다'); return; }
+
+      // proceed to DB save (same pattern as earlier)
+      btn.disabled = true; btn.textContent = '제출 중...';
+      try {
+        const { data: studentData, error: selectError } = await supabaseClient.from('students').select('student_id').eq('class', cls).eq('name', name);
+        if (selectError) throw new Error('학생 조회 실패: ' + selectError.message);
+        let studentId;
+        if (studentData && studentData.length > 0) studentId = studentData[0].student_id;
+        else {
+          const { data: insertData, error: insertError } = await supabaseClient.from('students').insert([{ class: cls, name: name }]).select('student_id').single();
+          if (insertError) throw new Error('학생 등록 실패: ' + insertError.message);
+          studentId = insertData.student_id;
+        }
+
+        const { data: existingRegs, error: existingError } = await supabaseClient.from('registrations').select('registration_id, course_capacity_id').eq('student_id', studentId);
+        if (existingError) throw new Error('중복 조회 실패: ' + existingError.message);
+        const existingCourseIds = existingRegs ? existingRegs.map(r => r.course_capacity_id) : [];
+        const isUpdate = existingCourseIds.length > 0;
+
+        const ACTUAL_CAPACITY_COLUMN_NAME = 'max_capacity';
+        const courseIds = generateCapacityIds();
+        for (const courseId of courseIds) {
+          const { data: capacityData, error: capacityError } = await supabaseClient.from('course_capacity').select(ACTUAL_CAPACITY_COLUMN_NAME).eq('id', courseId);
+          if (capacityError) throw new Error('정원 정보 조회 실패: ' + capacityError.message);
+          if (!capacityData || capacityData.length === 0) continue;
+          const capacity = capacityData[0][ACTUAL_CAPACITY_COLUMN_NAME];
+          if (capacity === null || capacity <= 0) continue;
+          const { count, error: countError } = await supabaseClient.from('registrations')
+            .select('*', { head: true, count: 'exact' })
+            .eq('course_capacity_id', courseId)
+            .not('student_id', 'eq', studentId);
+          if (countError) throw new Error('현재 신청 인원 카운트 실패: ' + countError.message);
+          if (count >= capacity) throw new Error(`"${courseId}" 수업이 정원 마감되었습니다! (${count}/${capacity})`);
+        }
+
+        if (isUpdate) {
+          const { error: delError } = await supabaseClient.from('registrations').delete().eq('student_id', studentId);
+          if (delError) throw new Error('기존 등록 삭제 실패: ' + delError.message);
+        }
+
+        const records = courseIds.map(cid => ({ student_id: studentId, course_capacity_id: cid }));
+        const { error: regError } = await supabaseClient.from('registrations').insert(records);
+        if (regError) throw new Error('수강 신청 실패 (DB 오류): ' + regError.message);
+
+        alert('✅ 신청 완료!');
+        makeTable();
+        refreshReadAndSelRemaining();
+      } catch (err) {
+        console.error(err);
+        alert('❌ ' + (err.message || err));
+      } finally {
+        btn.disabled = false; btn.textContent = '최종 수강 신청 (DB 저장)';
+      }
     }
 
     function checkSelValidity() {
@@ -811,201 +1111,14 @@
       }
     }
 
-    function updateReadingStatus(){ updateSummaryLine(); }
-    function updateMovieStatus(){ updateSummaryLine(); }
-    function updateLouStatus(){ updateSummaryLine(); }
-    function updateBibleStatus(){ updateSummaryLine(); }
-
-    function generateCapacityIds(){
-      const ids=[];
-      const dayNames={'sel-0126':'0126','sel-0127':'0127','sel-0128':'0128','sel-0129':'0129','sel-0202':'0202'};
-      for(const [sid,day] of Object.entries(dayNames)){ const val=document.getElementById(sid).value; if(val) ids.push(`select_${day}_${val}`); }
-      document.querySelectorAll('.read').forEach(sel=>{
-        const idx = sel.selectedIndex;
-        if (idx >= 0) {
-          const opt = sel.options[idx];
-          const isPlaceholder = opt && opt.dataset && opt.dataset.placeholder === '1';
-          const val = opt && opt.value ? String(opt.value).trim() : '';
-          if (!isPlaceholder && val !== '') ids.push(`책 읽기_${sel.dataset.day}_${sel.dataset.period}교시_${val}`);
-        }
-      });
-      document.querySelectorAll('.mov:checked').forEach(cb=>{ const blk = (Number(cb.dataset.start)===1)?'1-2교시':'3-4교시'; ids.push(`movie_${cb.dataset.day}_${blk}`); });
-      document.querySelectorAll('.lou:checked').forEach(cb=>ids.push(`마네_${cb.dataset.day}_${cb.dataset.period}교시`));
-      document.querySelectorAll('.bible:checked').forEach(cb=>ids.push(`bible_${cb.dataset.day}_${cb.dataset.period}교시`));
-      return [...new Set(ids)];
-    }
-
-    // New helper: count total 소영반 selections across all .read selects
-    function countSoYoungSelections() {
-      let cnt = 0;
-      document.querySelectorAll('.read').forEach(sel => {
-        const idx = sel.selectedIndex;
-        if (idx >= 0) {
-          const opt = sel.options[idx];
-          const isPlaceholder = opt && opt.dataset && opt.dataset.placeholder === '1';
-          const val = opt && opt.value ? String(opt.value).trim() : '';
-          if (!isPlaceholder && val !== '' && val.replace(/\s+/g,'').toLowerCase() === '소영반') cnt++;
-        }
-      });
-      return cnt;
-    }
-
-    // Helper: count 영화 selections in first week (1/27 ~ 1/30)
-    function countFirstWeekMovieSelections() {
-      const FIRST_WEEK_DAYS = new Set(["1/27(화)","1/28(수)","1/29(목)","1/30(금)"]);
-      return Array.from(document.querySelectorAll('.mov:checked')).reduce((acc, m) => acc + (FIRST_WEEK_DAYS.has(m.dataset.day) ? 1 : 0), 0);
-    }
-
-    async function submitRegistration(){
-      const btn = document.getElementById('submitBtn');
-      const cls = document.getElementById('cls').value.trim();
-      const name = document.getElementById('name').value.trim();
-      if (!cls || !name) { alert('반과 이름을 입력하세요.'); return; }
-
-      // Ensure per-day book reading and total book reading hours
-      const totalRead = countReadSelections();
-      const requiredDays = ["1/27(화)","1/28(수)","1/29(목)","1/30(금)","2/2(월)","2/3(화)","2/5(목)"];
-      for (const d of requiredDays) {
-        if (!hasReadOnDay(d)) {
-          alert(`${d}에 책읽기 수업을 1교시 이상 선택해야 합니다.`);
-          return;
-        }
-      }
-      if (totalRead < 14) {
-        alert(`책읽기 시간이 부족합니다. 현재 ${totalRead}시간, 14시간 이상 필요합니다.`);
-        return;
-      }
-
-      // New requirement: overall scheduled periods (hours) must be at least 31
-      const totalScheduled = computeTotalScheduledPeriods();
-      if (totalScheduled < 31) {
-        alert('전체 수업 시수 확인해주세요');
-        return;
-      }
-
-      // 선택수업 검증: 5일 모두 선택 & 서로 다른 과목
-      const selIds = ['sel-0126','sel-0127','sel-0128','sel-0129','sel-0202'];
-      const selVals = selIds.map(id => (document.getElementById(id) ? document.getElementById(id).value : '')).filter(v => v);
-      if (selVals.length < 5 || new Set(selVals).size < 5) {
-        alert('선택수업 확인 부탁합니다.');
-        return;
-      }
-
-      // Enforce 소영반 <= 6 before submitting
-      const soyoungCount = countSoYoungSelections();
-      if (soyoungCount > 6) {
-        alert('소영반은 전체 기간 동안 최대 6회까지 선택할 수 있습니다.');
-        return;
-      }
-
-      // Enforce movie limits again at submit time (safety)
-      const movCnt = document.querySelectorAll('.mov:checked').length;
-      if (movCnt > 3) {
-        alert('영화 선택 3회까지 가능합니다');
-        return;
-      }
-      const firstWeekMovCnt = countFirstWeekMovieSelections();
-      if (firstWeekMovCnt > 2) {
-        alert('첫주에 2회 시청가능합니다');
-        return;
-      }
-
-      const courseIds = generateCapacityIds();
-      if (courseIds.length === 0) { alert('선택한 수업이 없습니다.'); return; }
-
-      btn.disabled = true; btn.textContent = '제출 중...';
-      try {
-        const { data: studentData, error: selectError } = await supabaseClient.from('students').select('student_id').eq('class', cls).eq('name', name);
-        if (selectError) throw new Error('학생 조회 실패: ' + selectError.message);
-        let studentId;
-        if (studentData && studentData.length > 0) studentId = studentData[0].student_id;
-        else {
-          const { data: insertData, error: insertError } = await supabaseClient.from('students').insert([{ class: cls, name: name }]).select('student_id').single();
-          if (insertError) throw new Error('학생 등록 실패: ' + insertError.message);
-          studentId = insertData.student_id;
-        }
-
-        const { data: existingRegs, error: existingError } = await supabaseClient.from('registrations').select('registration_id, course_capacity_id').eq('student_id', studentId);
-        if (existingError) throw new Error('중복 조회 실패: ' + existingError.message);
-        const existingCourseIds = existingRegs ? existingRegs.map(r => r.course_capacity_id) : [];
-        const isUpdate = existingCourseIds.length > 0;
-
-        const ACTUAL_CAPACITY_COLUMN_NAME = 'max_capacity';
-        for (const courseId of courseIds) {
-          const { data: capacityData, error: capacityError } = await supabaseClient.from('course_capacity').select(ACTUAL_CAPACITY_COLUMN_NAME).eq('id', courseId);
-          if (capacityError) throw new Error('정원 정보 조회 실패: ' + capacityError.message);
-          if (!capacityData || capacityData.length === 0) continue;
-          const capacity = capacityData[0][ACTUAL_CAPACITY_COLUMN_NAME];
-          if (capacity === null || capacity <= 0) continue;
-          const { count, error: countError } = await supabaseClient.from('registrations')
-            .select('*', { head: true, count: 'exact' })
-            .eq('course_capacity_id', courseId)
-            .not('student_id', 'eq', studentId);
-          if (countError) throw new Error('현재 신청 인원 카운트 실패: ' + countError.message);
-          if (count >= capacity) throw new Error(`"${courseId}" 수업이 정원 마감되었습니다! (${count}/${capacity})`);
-        }
-
-        if (isUpdate) {
-          const { error: delError } = await supabaseClient.from('registrations').delete().eq('student_id', studentId);
-          if (delError) throw new Error('기존 등록 삭제 실패: ' + delError.message);
-        }
-
-        const records = courseIds.map(cid => ({ student_id: studentId, course_capacity_id: cid }));
-        const { error: regError } = await supabaseClient.from('registrations').insert(records);
-        if (regError) throw new Error('수강 신청 실패 (DB 오류): ' + regError.message);
-
-        if (isUpdate) alert('수정되었습니다'); else alert('✅ 신청 완료!');
-        makeTable();
-        refreshReadAndSelRemaining();
-      } catch (err) {
-        console.error(err);
-        alert('❌ ' + (err.message || err));
-      } finally {
-        btn.disabled = false; btn.textContent = '최종 수강 신청 (DB 저장)';
-      }
-    }
-
-    function makeTable(){
-      const cls = document.getElementById('cls').value.trim();
-      const name = document.getElementById('name').value.trim();
-      if (!cls || !name) { alert('반과 이름을 입력하세요.'); return; }
-      const periods=[1,2,3,4,5];
-      const days=["1/26(월)","1/27(화)","1/28(수)","1/29(목)","1/30(금)","2/2(월)","2/3(화)","2/5(목)"];
-      const tableData={}; days.forEach(d=>{ tableData[d]={}; periods.forEach(p=>tableData[d][p]=""); });
-      document.querySelectorAll('.read').forEach(s=>{
-        const idx = s.selectedIndex;
-        if (idx >= 0) {
-          const opt = s.options[idx];
-          const isPlaceholder = opt && opt.dataset && opt.dataset.placeholder === '1';
-          const val = opt && opt.value ? String(opt.value).trim() : '';
-          if (!isPlaceholder && val !== '' && tableData[s.dataset.day]) tableData[s.dataset.day][s.dataset.period] = `책읽기(${val})`;
-        }
-      });
-      document.querySelectorAll('.bible:checked').forEach(c=>{ if(tableData[c.dataset.day]) tableData[c.dataset.day][c.dataset.period] = "성경동화"; });
-      document.querySelectorAll('.mov:checked').forEach(c=>{ const s = Number(c.dataset.start); if(tableData[c.dataset.day]) { tableData[c.dataset.day][s] = "영화"; tableData[c.dataset.day][s+1] = "영화"; }});
-      document.querySelectorAll('.lou:checked').forEach(c=>{ if(tableData[c.dataset.day]) tableData[c.dataset.day][c.dataset.period] = "마네"; });
-
-      ['0126','0127','0128','0129'].forEach((k,i)=>{ const d = days[i]; const val = document.getElementById(`sel-${k}`).value; if(val && tableData[d]) tableData[d][5] = `선택수업(${val})`; });
-      const sel0202 = document.getElementById('sel-0202').value; if(sel0202 && tableData["2/2(월)"]) tableData["2/2(월)"][4] = `선택수업(${sel0202})`;
-
-      let html = `<h3>${escapeHtml(cls)} ${escapeHtml(name)} 시간표</h3><div class="table-wrapper"><table><tr><th>교시/날짜</th>`;
-      days.forEach(d=>html += `<th>${escapeHtml(d)}</th>`); html += `</tr>`;
-      periods.forEach(p=>{ html += `<tr><th>${p}교시</th>`; days.forEach(d=>{ const rawVal = tableData[d][p] || ''; const val = (typeof rawVal === 'string') ? rawVal : String(rawVal); let cName=''; if (val.trim().startsWith('책읽기')) cName='cell-read'; else if (val==='영화') cName='cell-movie'; else if (val==='마네') cName='cell-lounge'; else if (val==='성경동화') cName='cell-bible'; html += `<td class="${cName}">${escapeHtml(val)}</td>` }); html += `</tr>` });
-      html += `</table></div>`;
-      document.getElementById('result').innerHTML = html;
-
-      updateReadingStatus(); updateMovieStatus(); updateLouStatus(); updateBibleStatus(); checkSelValidity();
-      refreshReadAndSelRemaining();
-    }
-
+    // --- Event wiring and handlers (소영반 limit increased to 10) ---
     document.addEventListener('DOMContentLoaded', () => {
       initializeStableOptions();
+      removeSeungHyunOptionsGlobal();
 
-      // 책읽기: popup alert on overlap (instead of inline red text)
+      // 책읽기: change handlers
       document.querySelectorAll('.read').forEach(sel => {
-        // store initial previous value for revert logic
         sel.dataset.prevValue = sel.value || '';
-
         const onChangeHandler = function(){
           setTimeout(() => {
             const day = this.dataset.day, period = Number(this.dataset.period);
@@ -1015,8 +1128,7 @@
               const isPlaceholder = opt && opt.dataset && opt.dataset.placeholder === '1';
               const val = opt && opt.value ? String(opt.value).trim() : '';
 
-              // New: enforce global 소영반 limit (max 6)
-              // compute how many 소영반 would be selected after this change
+              // New: enforce global 소영반 limit (max 10)
               let newCount = 0;
               document.querySelectorAll('.read').forEach(s2 => {
                 const i2 = s2.selectedIndex;
@@ -1032,17 +1144,29 @@
                   }
                 }
               });
-              if (newCount > 6) {
+              if (newCount > 10) {
                 // revert to previous selection
                 const prev = this.dataset.prevValue || '';
-                // find option index that matches prev value, otherwise select first (placeholder)
                 let foundIndex = 0;
                 for (let i=0;i<this.options.length;i++){
                   if ((this.options[i].value || '').trim() === prev) { foundIndex = i; break; }
                 }
                 this.selectedIndex = foundIndex;
-                alert('소영반은 전체 기간 동안 최대 6회까지 선택할 수 있습니다.');
-                updateReadingStatus();
+                alert('전체 기간 동안 10회 가능합니다');
+                updateSummaryLine();
+                return;
+              }
+
+              // prevent 승현반 selection globally
+              if (!isPlaceholder && val === '승현반') {
+                const prev = this.dataset.prevValue || '';
+                let foundIndex = 0;
+                for (let i=0;i<this.options.length;i++){
+                  if ((this.options[i].value || '').trim() === prev) { foundIndex = i; break; }
+                }
+                this.selectedIndex = foundIndex;
+                alert('모든 책읽기 선택지에서 승현반은 선택할 수 없습니다.');
+                updateSummaryLine();
                 return;
               }
 
@@ -1052,7 +1176,7 @@
                   // selection conflicts -> revert and alert
                   this.selectedIndex = 0;
                   alert(`${day} ${period}교시는 이미 다른 수업이 선택되어 있습니다.`);
-                  updateReadingStatus();
+                  updateSummaryLine();
                   return;
                 } else {
                   document.getElementById('readMsg').innerHTML = '';
@@ -1061,7 +1185,7 @@
             }
             // update prevValue after successful change
             this.dataset.prevValue = (this.value || '');
-            updateReadingStatus();
+            updateSummaryLine();
             refreshReadAndSelRemaining();
           }, 60);
         };
@@ -1069,14 +1193,10 @@
         sel.addEventListener('blur', onChangeHandler, { passive: false });
         sel.addEventListener('touchend', onChangeHandler, { passive: false });
         sel.addEventListener('pointerup', onChangeHandler, { passive: false });
-        sel.addEventListener('focus', () => {
-          // update previous value on focus (so we can revert if needed)
-          sel.dataset.prevValue = sel.value || '';
-          refreshReadAndSelRemaining();
-        }, { passive: true });
+        sel.addEventListener('focus', () => { sel.dataset.prevValue = sel.value || ''; refreshReadAndSelRemaining(); }, { passive: true });
       });
 
-      // 성경동화: popup alert on overlap (keeps behavior)
+      // bible handlers
       document.querySelectorAll('.bible').forEach(cb => {
         cb.addEventListener('change', function(){
           if (this.checked) {
@@ -1085,7 +1205,7 @@
             if (occ[d] && occ[d][p] && occ[d][p].some(t => t !== '성경동화')) {
               this.checked = false;
               alert(`${d} ${p}교시는 이미 다른 수업이 선택되어 있습니다.`);
-              updateBibleStatus();
+              updateSummaryLine();
               return;
             } else {
               document.getElementById('bibleMsg').innerHTML = '';
@@ -1093,43 +1213,21 @@
           } else {
             document.getElementById('bibleMsg').innerHTML = '';
           }
-          updateBibleStatus();
+          updateSummaryLine();
         }, { passive: false });
       });
 
-      // Movie selection handler - updated to enforce:
-      //  - First week (1/27 ~ 1/30) max 2
-      //  - Overall movies max 3, show popup when attempting 4th
-      //  - Preserve conflict checks and per-day exclusivity
+      // mov handlers (apricot color applied in makeTable via class)
       const FIRST_WEEK_DAYS = new Set(["1/27(화)","1/28(수)","1/29(목)","1/30(금)"]);
       document.querySelectorAll('.mov').forEach(cb => {
         cb.addEventListener('change', function(){
           const day = this.dataset.day;
           if (this.checked) {
-            // ensure only one movie block per day (1-2 or 3-4)
             document.querySelectorAll('.mov').forEach(m => { if (m !== this && m.dataset.day === day && m.checked) m.checked = false; });
-
-            // Count first-week movie selections (including this one)
             const firstWeekCount = Array.from(document.querySelectorAll('.mov:checked')).reduce((acc, m) => acc + (FIRST_WEEK_DAYS.has(m.dataset.day) ? 1 : 0), 0);
-            if (firstWeekCount > 2) {
-              // revert
-              this.checked = false;
-              alert('첫주에 2회 시청가능합니다');
-              updateMovieStatus();
-              return;
-            }
-
-            // Count total movie selections (including this one)
+            if (firstWeekCount > 2) { this.checked = false; alert('첫주에 2회 시청가능합니다'); updateSummaryLine(); return; }
             const total = document.querySelectorAll('.mov:checked').length;
-            if (total > 3) {
-              // revert and warn
-              this.checked = false;
-              alert('영화 선택 3회까지 가능합니다');
-              updateMovieStatus();
-              return;
-            }
-
-            // schedule conflict: movie occupies two periods (start, start+1)
+            if (total > 3) { this.checked = false; alert('영화 선택 3회까지 가능합니다'); updateSummaryLine(); return; }
             const s = Number(this.dataset.start);
             const occ = buildScheduleOccupation();
             for (let p of [s, s+1]) {
@@ -1139,22 +1237,22 @@
                 return;
               }
             }
-
             document.getElementById('movMsg').innerHTML = '';
           } else {
             document.getElementById('movMsg').innerHTML = '';
           }
-          updateMovieStatus();
+          updateSummaryLine();
         }, { passive: false });
       });
 
+      // lou handlers (마네) - color applied in makeTable via class 'cell-lounge'
       document.querySelectorAll('.lou').forEach(cb => {
         cb.addEventListener('change', function(){
           const day = this.dataset.day;
           if (this.checked) {
             document.querySelectorAll('.lou').forEach(x => { if (x !== this && x.dataset.day === day && x.checked) x.checked = false; });
             const totalLou = document.querySelectorAll('.lou:checked').length;
-            if (totalLou > 6) { this.checked = false; document.getElementById('louMsg').innerHTML = '<span class="bad">마네는 최대 6시간까지만 선택 가능합니다.</span>'; updateLouStatus(); return; }
+            if (totalLou > 6) { this.checked = false; document.getElementById('louMsg').innerHTML = '<span class="bad">마네는 최대 6시간까지만 선택 가능합니다.</span>'; updateSummaryLine(); return; }
             const occ = buildScheduleOccupation();
             const p = Number(this.dataset.period);
             if (occ[this.dataset.day] && occ[this.dataset.day][p] && occ[this.dataset.day][p].some(t => t !== '마네')) {
@@ -1166,9 +1264,12 @@
           } else {
             document.getElementById('louMsg').innerHTML = '';
           }
-          updateLouStatus();
+          updateSummaryLine();
         }, { passive: false });
       });
+
+      // selDay duplicate guard
+      wireSelDayDuplicateGuard();
 
       document.querySelectorAll('.selDay').forEach(s => {
         s.addEventListener('change', checkSelValidity, { passive: true });
@@ -1179,12 +1280,25 @@
       document.getElementById('makeBtn').addEventListener('pointerup', function(e){ e.preventDefault(); makeTable(); }, { passive: false });
       document.getElementById('submitBtn').addEventListener('click', function(e){ e.preventDefault(); submitRegistration(); }, { passive: false });
 
-      checkSelValidity(); updateReadingStatus(); updateMovieStatus(); updateLouStatus(); updateBibleStatus();
+      checkSelValidity(); updateSummaryLine(); updateSummaryLine(); refreshReadAndSelRemaining();
 
       startSeatsPolling(5000);
       window.addEventListener('beforeunload', () => stopSeatsPolling());
       console.log('App initialized and remaining-seat refresh started.');
     });
+
+    // polling helpers (unchanged)
+    let seatsIntervalHandle = null;
+    function startSeatsPolling(intervalMs = 5000){
+      if (seatsIntervalHandle) clearInterval(seatsIntervalHandle);
+      initializeStableOptions();
+      removeSeungHyunOptionsGlobal();
+      refreshReadAndSelRemaining().then(()=> {
+        seatsIntervalHandle = setInterval(refreshReadAndSelRemaining, intervalMs);
+      });
+    }
+    function stopSeatsPolling(){ if (seatsIntervalHandle) clearInterval(seatsIntervalHandle); seatsIntervalHandle = null; }
+
   </script>
 </body>
 </html>
