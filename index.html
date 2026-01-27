@@ -523,16 +523,6 @@
     <button id="makeBtn" type="button">시간표 만들기</button>
     <button id="submitBtn" class="primary" type="button">최종 수강 신청 (DB 저장)</button>
   </div>
-<!-- 관리자용: 학생 불러오기 / 관리자 저장 -->
-<div class="admin-row" style="margin-top:10px; display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
-  <input type="text" id="adminStudentId" placeholder="학생 ID (선택)" style="padding:8px; min-width:140px;">
-  <button id="loadRegBtn" type="button">신청 불러오기</button>
-
-  <span style="opacity:.7;">또는</span>
-
-  <input type="text" id="adminId" placeholder="관리자 ID (이메일)" style="padding:8px; min-width:180px;">
-  <button id="saveAdminBtn" type="button">관리자 저장 (업데이트)</button>
-</div>
   <div id="result" style="margin-top:14px"></div>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -1336,6 +1326,5 @@
     function stopSeatsPolling(){ if (seatsIntervalHandle) clearInterval(seatsIntervalHandle); seatsIntervalHandle = null; }
 
   </script>
-    <script src="./admin_Version3.js"></script>
 </body>
 </html>
